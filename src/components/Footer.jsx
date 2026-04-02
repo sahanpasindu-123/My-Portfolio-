@@ -23,16 +23,16 @@ export default function Footer() {
         <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#4CE7FF]/70 to-transparent" />
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-2">
-            <p className="text-sm font-medium uppercase tracking-[0.28em] text-slate-400">
+            <p className="text-sm font-medium uppercase tracking-[0.28em] text-slate-300">
               Sahan Pasindu
             </p>
-            <p className="max-w-2xl text-sm leading-7 text-slate-300">
+            <p className="max-w-2xl text-sm leading-7 text-slate-200">
               UI/UX-focused full-stack portfolio crafted with React, Tailwind,
               and GSAP-ready motion design.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 text-sm text-slate-300">
+          <div className="flex flex-wrap gap-3 text-sm text-slate-200">
             {FOOTER_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -41,7 +41,7 @@ export default function Footer() {
                 rel={
                   link.href.startsWith("http") ? "noreferrer" : undefined
                 }
-                className="rounded-full border border-white/10 bg-slate-950/50 px-4 py-2 transition hover:border-[#4CE7FF]/30 hover:text-white"
+                className="rounded-full border border-white/12 bg-slate-950/68 px-4 py-2 transition hover:border-[#4CE7FF]/30 hover:text-white"
               >
                 {link.label}
               </a>

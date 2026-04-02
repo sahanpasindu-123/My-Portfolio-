@@ -14,6 +14,58 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ENTER_TRIGGER = "top 82%";
 const INITIAL_VISIBILITY_RATIO = 0.18;
+const DEFAULT_CINEMATIC_SYNC = {
+  progress: 0,
+  driftX: 0,
+  driftY: 0,
+  depth: 0,
+  calm: 0,
+};
+
+const PARALLAX_SPEEDS = {
+  slow: {
+    name: "slow",
+    yTravel: 24,
+    xTravel: 8,
+    scaleDelta: 0.02,
+    sceneX: 4,
+    sceneY: 3.6,
+    sceneDepth: 0.0032,
+    opacityFloor: 0.9,
+    opacityBoost: 0.05,
+    scrub: 1.55,
+    mouse: null,
+  },
+  medium: {
+    name: "medium",
+    yTravel: 46,
+    xTravel: 12,
+    scaleDelta: 0.028,
+    sceneX: 6,
+    sceneY: 4.8,
+    sceneDepth: 0.0044,
+    opacityFloor: 0.94,
+    opacityBoost: 0.04,
+    scrub: 1.24,
+    mouse: null,
+  },
+  fast: {
+    name: "fast",
+    yTravel: 72,
+    xTravel: 18,
+    scaleDelta: 0.038,
+    sceneX: 8.5,
+    sceneY: 6,
+    sceneDepth: 0.0056,
+    opacityFloor: 0.96,
+    opacityBoost: 0.03,
+    scrub: 1.08,
+    mouse: {
+      x: 8,
+      y: 6,
+    },
+  },
+};
 
 const MOTION_TARGET_SELECTOR = [
   "[data-animated-section]",
@@ -218,6 +270,80 @@ const SECTION_PROFILES = {
 const normalizeElements = (elements) =>
   gsap.utils.toArray(elements).filter(Boolean);
 
+const clamp01 = gsap.utils.clamp(0, 1);
+
+const readCinematicSync = () => {
+  if (typeof window === "undefined") {
+    return DEFAULT_CINEMATIC_SYNC;
+  }
+
+  return window.__portfolioCinematicState ?? DEFAULT_CINEMATIC_SYNC;
+};
+
+const getNumericParallaxProfile = (value) => {
+  const magnitude = Math.max(Math.abs(value), 0.04);
+  const yTravel = gsap.utils.clamp(28, 112, magnitude * 420);
+  const intensity = gsap.utils.mapRange(28, 112, 0, 1, yTravel);
+
+  return {
+    name: "custom",
+    yTravel,
+    xTravel: gsap.utils.interpolate(8, 26, intensity),
+    scaleDelta: gsap.utils.interpolate(0.022, 0.05, intensity),
+    sceneX: gsap.utils.interpolate(5, 13, intensity),
+    sceneY: gsap.utils.interpolate(4, 9, intensity),
+    sceneDepth: gsap.utils.interpolate(0.0035, 0.0075, intensity),
+    opacityFloor: gsap.utils.interpolate(0.76, 0.94, intensity),
+    opacityBoost: gsap.utils.interpolate(0.12, 0.06, intensity),
+    scrub: gsap.utils.interpolate(1.28, 0.95, intensity),
+    mouse:
+      yTravel >= PARALLAX_SPEEDS.fast.yTravel * 0.85
+        ? PARALLAX_SPEEDS.fast.mouse
+        : null,
+  };
+};
+
+const getParallaxProfile = (element, index) => {
+  const rawSpeed = element.dataset.speed?.trim().toLowerCase();
+  const numericSpeed = Number(rawSpeed);
+  const profile =
+    rawSpeed && Number.isFinite(numericSpeed)
+      ? getNumericParallaxProfile(numericSpeed)
+      : PARALLAX_SPEEDS[rawSpeed] ?? PARALLAX_SPEEDS.medium;
+
+  const horizontalDirection =
+    element.dataset.parallaxX === "right"
+      ? 1
+      : element.dataset.parallaxX === "left"
+        ? -1
+        : index % 2 === 0
+          ? 1
+          : -1;
+  const verticalDirection = element.dataset.parallaxY === "reverse" ? -1 : 1;
+
+  return {
+    ...profile,
+    horizontalDirection,
+    verticalDirection,
+    mouseEnabled:
+      element.hasAttribute("data-mouse-parallax") && Boolean(profile.mouse),
+  };
+};
+
+const getInitialParallaxProgress = (trigger) => {
+  const rect = trigger.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  const totalDistance = viewportHeight + rect.height;
+  const travelledDistance = viewportHeight - rect.top;
+
+  if (totalDistance <= 0) {
+    return 0.5;
+  }
+
+  return clamp01(travelledDistance / totalDistance);
+};
+
 const setVisible = (elements) => {
   if (!elements.length) {
     return;
@@ -287,6 +413,7 @@ export function usePortfolioAnimations() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
 
     const cleanup = [];
     const ctx = gsap.context(() => {
@@ -312,7 +439,13 @@ export function usePortfolioAnimations() {
 
       if (prefersReducedMotion) {
         setVisible(motionTargets);
-        gsap.set(parallaxElements, { yPercent: 0, clearProps: "transform" });
+        gsap.set(parallaxElements, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          clearProps: "transform,opacity",
+        });
         gsap.set(progressBar, { scaleX: 1, transformOrigin: "left center" });
 
         if (navbar) {
@@ -393,23 +526,134 @@ export function usePortfolioAnimations() {
           cleanup.push(() => animation.kill());
         });
 
-      parallaxElements.forEach((element) => {
-        const speed = Number(element.dataset.speed ?? 0.14);
-        const trigger = element.closest("[data-section]") ?? element;
+      parallaxElements.forEach((element, index) => {
+        const profile = getParallaxProfile(element, index);
+        const trigger =
+          element.closest("[data-parallax-scope]") ??
+          element.closest("[data-section]") ??
+          element.closest("[data-animated-section]") ??
+          element;
+        const initialProgress = getInitialParallaxProgress(trigger);
+        const state = {
+          progress: initialProgress,
+          mouseX: 0,
+          mouseY: 0,
+        };
+        const setX = gsap.quickSetter(element, "x", "px");
+        const setY = gsap.quickSetter(element, "y", "px");
+        const setScale = gsap.quickSetter(element, "scale");
+        const setOpacity = gsap.quickSetter(element, "opacity");
 
-        const tween = gsap.to(element, {
-          yPercent: speed * -100,
-          ease: "none",
+        gsap.set(element, {
           force3D: true,
+          transformOrigin: "center center",
+        });
+
+        const render = () => {
+          const centeredProgress = state.progress - 0.5;
+          const focus = clamp01(1 - Math.abs(centeredProgress) * 2);
+          const cinematicSync = readCinematicSync();
+          const isAtmosphere = element.classList.contains("parallax-atmosphere");
+          const sectionState = element.closest("[data-focus-state]")?.dataset.focusState;
+          const isActiveSection = sectionState === "active";
+          const calmDamping = 1 - cinematicSync.calm * 0.22;
+          const motionFactor = (isAtmosphere ? 0.68 : 0.44) * calmDamping;
+          const sceneFactor = isAtmosphere ? 0.78 : 0.46;
+          const scaleFactor = isAtmosphere ? 0.72 : 0.38;
+          const atmosphereOpacity = gsap.utils.clamp(
+            0.16,
+            0.44,
+            (profile.opacityFloor + focus * profile.opacityBoost) *
+              0.42 *
+              (isActiveSection ? 0.9 : 1),
+          );
+          const contentOpacity = gsap.utils.clamp(0.95, 1, 0.95 + focus * 0.05);
+          const x =
+            centeredProgress * profile.xTravel * profile.horizontalDirection * motionFactor +
+            cinematicSync.driftX * profile.sceneX * sceneFactor +
+            state.mouseX * (isAtmosphere ? 0.15 : 1);
+          const y =
+            centeredProgress * profile.yTravel * profile.verticalDirection * motionFactor +
+            cinematicSync.driftY * profile.sceneY * sceneFactor +
+            state.mouseY * (isAtmosphere ? 0.15 : 1);
+          const scale =
+            1 -
+            (1 - focus) * profile.scaleDelta * scaleFactor +
+            cinematicSync.depth * profile.sceneDepth * sceneFactor;
+          const opacity = isAtmosphere ? atmosphereOpacity : contentOpacity;
+
+          setX(x);
+          setY(y);
+          setScale(scale);
+          setOpacity(opacity);
+        };
+
+        const progressState = { value: initialProgress };
+        const tween = gsap.to(progressState, {
+          value: 1,
+          ease: "none",
+          onUpdate: () => {
+            state.progress = progressState.value;
+            render();
+          },
           scrollTrigger: {
             trigger,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.2,
+            scrub: profile.scrub,
+            invalidateOnRefresh: true,
+            onRefresh: () => {
+              state.progress = getInitialParallaxProgress(trigger);
+              render();
+            },
           },
         });
 
         cleanup.push(() => tween.kill());
+
+        if (hasFinePointer && profile.mouseEnabled && profile.mouse) {
+          const mouseXTo = gsap.quickTo(state, "mouseX", {
+            duration: 0.6,
+            ease: "power3.out",
+            onUpdate: render,
+          });
+          const mouseYTo = gsap.quickTo(state, "mouseY", {
+            duration: 0.6,
+            ease: "power3.out",
+            onUpdate: render,
+          });
+
+          const handlePointerMove = (event) => {
+            const bounds = element.getBoundingClientRect();
+
+            if (!bounds.width || !bounds.height) {
+              return;
+            }
+
+            const x = ((event.clientX - bounds.left) / bounds.width - 0.5) *
+              profile.mouse.x;
+            const y = ((event.clientY - bounds.top) / bounds.height - 0.5) *
+              profile.mouse.y;
+
+            mouseXTo(x);
+            mouseYTo(y);
+          };
+
+          const handlePointerLeave = () => {
+            mouseXTo(0);
+            mouseYTo(0);
+          };
+
+          element.addEventListener("pointermove", handlePointerMove);
+          element.addEventListener("pointerleave", handlePointerLeave);
+
+          cleanup.push(() => {
+            element.removeEventListener("pointermove", handlePointerMove);
+            element.removeEventListener("pointerleave", handlePointerLeave);
+          });
+        }
+
+        render();
       });
 
       if (progressBar) {

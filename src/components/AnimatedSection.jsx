@@ -5,6 +5,7 @@ function joinClasses(...classes) {
 export default function AnimatedSection({
   as: Tag = "section",
   animation = "default",
+  isActive = false,
   className,
   children,
   ...props
@@ -13,7 +14,8 @@ export default function AnimatedSection({
     <Tag
       data-animated-section
       data-animation-profile={animation}
-      className={joinClasses(className)}
+      data-focus-state={isActive ? "active" : "inactive"}
+      className={joinClasses("focus-section", isActive ? "is-active" : "is-inactive", className)}
       {...props}
     >
       {children}

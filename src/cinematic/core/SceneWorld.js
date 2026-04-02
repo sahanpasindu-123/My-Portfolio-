@@ -43,7 +43,7 @@ export class SceneWorld {
     this.forwardAxis = new THREE.Vector3(0, 0, 1);
 
     this.scene.background = this.backgroundColor;
-    this.scene.fog = new THREE.FogExp2(this.backgroundColor, 0.0105);
+    this.scene.fog = new THREE.FogExp2(this.backgroundColor, 0.0114);
 
     this.createLights();
     this.createIntro();
@@ -55,17 +55,17 @@ export class SceneWorld {
   }
 
   createLights() {
-    this.ambientLight = new THREE.AmbientLight("#91a7ff", 0.75);
-    this.directionalLight = new THREE.DirectionalLight("#ffffff", 1.85);
+    this.ambientLight = new THREE.AmbientLight("#91a7ff", 0.62);
+    this.directionalLight = new THREE.DirectionalLight("#ffffff", 1.55);
     this.directionalLight.position.set(10, 12, 18);
-    this.hemisphereLight = new THREE.HemisphereLight("#91b6ff", "#06080f", 0.7);
-    this.portalLight = new THREE.PointLight("#48d6ff", 55, 42, 2);
+    this.hemisphereLight = new THREE.HemisphereLight("#91b6ff", "#06080f", 0.58);
+    this.portalLight = new THREE.PointLight("#48d6ff", 42, 42, 2);
     this.portalLight.position.set(0, 0, 4);
 
-    this.fillLight = new THREE.PointLight("#8d65ff", 24, 120, 2);
+    this.fillLight = new THREE.PointLight("#8d65ff", 18, 120, 2);
     this.fillLight.position.set(-8, 10, -66);
 
-    this.endLight = new THREE.PointLight("#a3ecff", 18, 55, 2);
+    this.endLight = new THREE.PointLight("#a3ecff", 14, 55, 2);
     this.endLight.position.set(0, 5, -198);
 
     this.world.add(
@@ -89,7 +89,7 @@ export class SceneWorld {
       new THREE.MeshStandardMaterial({
         color: "#88f4ff",
         emissive: "#3ae1ff",
-        emissiveIntensity: 2.5,
+        emissiveIntensity: 1.9,
         roughness: 0.18,
         metalness: 0.12,
       }),
@@ -99,7 +99,7 @@ export class SceneWorld {
       new THREE.MeshBasicMaterial({
         color: "#8b63ff",
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.42,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       }),
@@ -119,7 +119,7 @@ export class SceneWorld {
       new THREE.SphereGeometry(5.4, 32, 32),
       createGlowMaterial({
         color: "#6adfff",
-        opacity: 0.48,
+        opacity: 0.32,
         power: 2.1,
       }),
     );
@@ -140,11 +140,11 @@ export class SceneWorld {
       new THREE.MeshStandardMaterial({
         color: "#ff5f5f",
         emissive: "#ff8f4d",
-        emissiveIntensity: 1.5,
+        emissiveIntensity: 1.1,
         roughness: 0.28,
         metalness: 0.08,
         transparent: true,
-        opacity: 1,
+        opacity: 0.88,
       }),
     );
     this.debugCube.position.set(0, 0, 8);
@@ -192,7 +192,7 @@ export class SceneWorld {
       new THREE.PointsMaterial({
         size: 0.12,
         transparent: true,
-        opacity: 0.78,
+        opacity: 0.58,
         vertexColors: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
@@ -239,7 +239,7 @@ export class SceneWorld {
         color: "#a4f8ff",
         size: 0.18,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.62,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
         sizeAttenuation: true,
@@ -316,7 +316,7 @@ export class SceneWorld {
       new THREE.PointsMaterial({
         size: 0.15,
         transparent: true,
-        opacity: 0.92,
+        opacity: 0.72,
         vertexColors: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
@@ -330,7 +330,7 @@ export class SceneWorld {
       new THREE.SphereGeometry(5.8, 32, 32),
       createGlowMaterial({
         color: "#7beaff",
-        opacity: 0.22,
+        opacity: 0.16,
         power: 2.35,
       }),
     );
@@ -357,7 +357,7 @@ export class SceneWorld {
       new THREE.MeshStandardMaterial({
         color: "#14243e",
         emissive: "#46d7ff",
-        emissiveIntensity: 1.2,
+        emissiveIntensity: 0.9,
         roughness: 0.28,
         metalness: 0.14,
       }),
@@ -366,7 +366,7 @@ export class SceneWorld {
       new THREE.SphereGeometry(5.2, 28, 28),
       createGlowMaterial({
         color: "#5ad6ff",
-        opacity: 0.34,
+        opacity: 0.22,
         power: 2.2,
       }),
     );
@@ -386,7 +386,7 @@ export class SceneWorld {
           color: config.color,
           side: THREE.DoubleSide,
           transparent: true,
-          opacity: 0.22,
+          opacity: 0.14,
           depthWrite: false,
           blending: THREE.AdditiveBlending,
         }),
@@ -401,7 +401,7 @@ export class SceneWorld {
       new THREE.MeshStandardMaterial({
         color: "#ffffff",
         emissive: "#8cf3ff",
-        emissiveIntensity: 1.45,
+        emissiveIntensity: 1.05,
         roughness: 0.3,
         metalness: 0.2,
       }),
@@ -456,7 +456,7 @@ export class SceneWorld {
         new THREE.MeshStandardMaterial({
           color: config.color,
           emissive: config.color,
-          emissiveIntensity: 0.52,
+          emissiveIntensity: 0.38,
           roughness: 0.52,
           metalness: 0.1,
         }),
@@ -468,7 +468,7 @@ export class SceneWorld {
           color: "#d9f8ff",
           wireframe: true,
           transparent: true,
-          opacity: 0.12,
+          opacity: 0.08,
           depthWrite: false,
         }),
       );
@@ -478,7 +478,7 @@ export class SceneWorld {
         new THREE.MeshBasicMaterial({
           color: config.glow,
           transparent: true,
-          opacity: 0.45,
+          opacity: 0.28,
           depthWrite: false,
           blending: THREE.AdditiveBlending,
         }),
@@ -489,7 +489,7 @@ export class SceneWorld {
         new THREE.SphereGeometry(config.radius * 1.55, 24, 24),
         createGlowMaterial({
           color: config.glow,
-          opacity: 0.26,
+          opacity: 0.18,
           power: 2.45,
         }),
       );
@@ -500,7 +500,7 @@ export class SceneWorld {
         new THREE.MeshBasicMaterial({
           color: "#f4ffff",
           transparent: true,
-          opacity: 0.9,
+          opacity: 0.68,
           blending: THREE.AdditiveBlending,
         }),
       );
@@ -547,7 +547,7 @@ export class SceneWorld {
         color: "#59dbff",
         wireframe: true,
         transparent: true,
-        opacity: 0.16,
+        opacity: 0.1,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
@@ -559,7 +559,7 @@ export class SceneWorld {
       new THREE.LineBasicMaterial({
         color: "#b6fbff",
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.34,
       }),
     );
     this.tunnelGroup.add(this.tunnelLine);
@@ -569,7 +569,7 @@ export class SceneWorld {
       new THREE.MeshBasicMaterial({
         color: "#8deeff",
         transparent: true,
-        opacity: 0.32,
+        opacity: 0.18,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
@@ -598,7 +598,7 @@ export class SceneWorld {
         color: "#e6ffff",
         size: 0.1,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.58,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
@@ -624,7 +624,7 @@ export class SceneWorld {
       new THREE.MeshStandardMaterial({
         color: "#12212d",
         emissive: "#9eeeff",
-        emissiveIntensity: 0.4,
+        emissiveIntensity: 0.28,
         roughness: 0.72,
         metalness: 0.08,
       }),
@@ -633,7 +633,7 @@ export class SceneWorld {
       new THREE.SphereGeometry(7.2, 28, 28),
       createGlowMaterial({
         color: "#b7f8ff",
-        opacity: 0.24,
+        opacity: 0.16,
         power: 2,
       }),
     );
@@ -666,7 +666,7 @@ export class SceneWorld {
         color: "#d9feff",
         size: 0.16,
         transparent: true,
-        opacity: 0.58,
+        opacity: 0.38,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
@@ -701,12 +701,12 @@ export class SceneWorld {
 
     this.scene.background.copy(this.backgroundColor);
     this.scene.fog.color.copy(this.backgroundColor);
-    this.scene.fog.density = 0.0105 + this.state.tunnelReveal * 0.004 - this.state.endingCalm * 0.0035;
+    this.scene.fog.density = 0.0114 + this.state.tunnelReveal * 0.0032 - this.state.endingCalm * 0.0028;
 
-    this.portalLight.intensity = 55 * (1 - this.state.portalFade) + 8;
-    this.endLight.intensity = 18 + this.state.endingCalm * 26;
-    this.fillLight.intensity = 20 + this.state.orbitReveal * 8 + this.state.tunnelReveal * 6;
-    this.directionalLight.intensity = 1.25 + (1 - this.state.portalFade) * 0.6 + this.state.orbitReveal * 0.35;
+    this.portalLight.intensity = 42 * (1 - this.state.portalFade) + 6;
+    this.endLight.intensity = 14 + this.state.endingCalm * 18;
+    this.fillLight.intensity = 16 + this.state.orbitReveal * 6 + this.state.tunnelReveal * 4;
+    this.directionalLight.intensity = 1.1 + (1 - this.state.portalFade) * 0.42 + this.state.orbitReveal * 0.24;
   }
 
   updateIntro(elapsed) {
@@ -714,21 +714,21 @@ export class SceneWorld {
     this.portal.core.material.uniforms.uProgress.value = this.state.portalTravel;
 
     const introOpacity = 1 - this.state.portalFade;
-    this.portal.ring.material.emissiveIntensity = 1.4 + this.state.portalSwirl * 2.5;
-    this.portal.halo.material.opacity = 0.4 + this.state.portalSwirl * 0.18;
+    this.portal.ring.material.emissiveIntensity = 1.1 + this.state.portalSwirl * 1.6;
+    this.portal.halo.material.opacity = 0.24 + this.state.portalSwirl * 0.12;
     this.portal.core.material.uniforms.opacity.value = 0.85 * introOpacity;
-    this.portal.aura.material.uniforms.uOpacity.value = 0.32 + this.state.portalSwirl * 0.18;
+    this.portal.aura.material.uniforms.uOpacity.value = 0.2 + this.state.portalSwirl * 0.1;
 
     this.portal.group.rotation.z = elapsed * 0.14;
-    this.portal.ring.rotation.y = elapsed * 0.18;
-    this.portal.halo.rotation.z = -elapsed * 0.22;
+    this.portal.ring.rotation.y = elapsed * 0.12;
+    this.portal.halo.rotation.z = -elapsed * 0.16;
 
     const portalScale = 1 + this.state.portalSwirl * 0.12 + Math.sin(elapsed * 1.6) * 0.02;
     this.portal.group.scale.setScalar(portalScale);
 
-    this.debugCube.rotation.x = elapsed * 0.85;
-    this.debugCube.rotation.y = elapsed * 1.2;
-    this.debugCube.material.opacity = THREE.MathUtils.clamp(1 - this.state.portalFade * 0.92, 0.12, 1);
+    this.debugCube.rotation.x = elapsed * 0.64;
+    this.debugCube.rotation.y = elapsed * 0.86;
+    this.debugCube.material.opacity = THREE.MathUtils.clamp(0.78 - this.state.portalFade * 0.72, 0.08, 0.78);
 
     const introPositions = this.introParticleData.positions;
     const introBase = this.introParticleData.base;
@@ -756,7 +756,7 @@ export class SceneWorld {
         this.state.portalTravel * portalInfluence * -9;
     }
     this.introParticles.geometry.attributes.position.needsUpdate = true;
-    this.introParticles.material.opacity = 0.68 * introOpacity + 0.08;
+    this.introParticles.material.opacity = 0.48 * introOpacity + 0.06;
 
     const dustPositions = this.portalDustData.positions;
     const dustBase = this.portalDustData.base;
@@ -774,7 +774,7 @@ export class SceneWorld {
       dustPositions[stride + 2] = dustBase[stride + 2] - this.state.portalTravel * 7;
     }
     this.portalDust.geometry.attributes.position.needsUpdate = true;
-    this.portalDust.material.opacity = 0.9 * introOpacity;
+    this.portalDust.material.opacity = 0.54 * introOpacity;
   }
 
   updateFigure(elapsed) {
@@ -801,29 +801,29 @@ export class SceneWorld {
     }
 
     this.figurePoints.geometry.attributes.position.needsUpdate = true;
-    this.figurePoints.material.opacity = 0.08 + visibility * 0.85;
+    this.figurePoints.material.opacity = 0.06 + visibility * 0.62;
 
-    this.figureGroup.rotation.y = elapsed * 0.26 * visibility;
-    this.figureGroup.rotation.z = Math.sin(elapsed * 0.22) * 0.06 * visibility;
-    this.figureGroup.position.y = -2 + Math.sin(elapsed * 0.85) * 0.45 * visibility;
+    this.figureGroup.rotation.y = elapsed * 0.2 * visibility;
+    this.figureGroup.rotation.z = Math.sin(elapsed * 0.22) * 0.04 * visibility;
+    this.figureGroup.position.y = -2 + Math.sin(elapsed * 0.72) * 0.32 * visibility;
 
-    const auraOpacity = 0.08 + morph * 0.22 - dissolve * 0.12;
+    const auraOpacity = 0.05 + morph * 0.14 - dissolve * 0.08;
     this.figureAura.material.uniforms.uOpacity.value = Math.max(auraOpacity, 0);
-    this.figureAura.scale.setScalar(0.88 + morph * 0.16 + Math.sin(elapsed * 1.2) * 0.02);
+    this.figureAura.scale.setScalar(0.9 + morph * 0.12 + Math.sin(elapsed * 1.1) * 0.015);
   }
 
   updateOrbitSystem(elapsed) {
     const reveal = this.state.orbitReveal;
 
     this.orbitGroup.scale.setScalar(0.74 + reveal * 0.26);
-    this.orbitGroup.rotation.y = elapsed * 0.12 + this.state.orbitTravel * 0.5;
-    this.orbitCore.rotation.x = elapsed * 0.28;
-    this.orbitCore.rotation.y = elapsed * 0.46;
-    this.orbitGlow.material.uniforms.uOpacity.value = 0.08 + reveal * 0.26;
+    this.orbitGroup.rotation.y = elapsed * 0.09 + this.state.orbitTravel * 0.38;
+    this.orbitCore.rotation.x = elapsed * 0.22;
+    this.orbitCore.rotation.y = elapsed * 0.34;
+    this.orbitGlow.material.uniforms.uOpacity.value = 0.06 + reveal * 0.18;
 
     this.orbitBands.forEach((band, index) => {
-      band.material.opacity = 0.05 + reveal * (0.14 + index * 0.06);
-      band.rotation.y += 0.001 + index * 0.0004;
+      band.material.opacity = 0.04 + reveal * (0.08 + index * 0.04);
+      band.rotation.y += 0.0007 + index * 0.00025;
     });
 
     this.orbiterData.forEach((orbiter, index) => {
@@ -848,23 +848,23 @@ export class SceneWorld {
 
     this.projectWorlds.forEach((world, index) => {
       world.group.position.copy(world.basePosition);
-      world.group.position.x += Math.sin(elapsed * 0.35 + world.floatOffset) * 0.5 * drift;
-      world.group.position.y += Math.cos(elapsed * 0.55 + world.floatOffset) * 0.55 * reveal;
-      world.group.position.z += Math.sin(elapsed * 0.22 + index) * 0.4 * drift;
+      world.group.position.x += Math.sin(elapsed * 0.28 + world.floatOffset) * 0.34 * drift;
+      world.group.position.y += Math.cos(elapsed * 0.42 + world.floatOffset) * 0.38 * reveal;
+      world.group.position.z += Math.sin(elapsed * 0.18 + index) * 0.28 * drift;
 
       world.group.rotation.y = elapsed * world.rotationSpeed;
-      world.group.rotation.z = Math.sin(elapsed * 0.3 + world.floatOffset) * 0.08;
+      world.group.rotation.z = Math.sin(elapsed * 0.24 + world.floatOffset) * 0.05;
       world.group.scale.setScalar(0.7 + reveal * 0.3);
 
       world.core.rotation.x += 0.004 * world.rotationSpeed;
       world.core.rotation.y += 0.006 * world.rotationSpeed;
       world.shell.rotation.y -= 0.0025;
       world.ring.rotation.z += 0.004;
-      world.ring.material.opacity = 0.05 + reveal * 0.42;
-      world.aura.material.uniforms.uOpacity.value = 0.06 + reveal * 0.2;
+      world.ring.material.opacity = 0.04 + reveal * 0.24;
+      world.aura.material.uniforms.uOpacity.value = 0.05 + reveal * 0.12;
 
-      world.satellitePivot.rotation.y = elapsed * (0.7 + index * 0.08);
-      world.satellitePivot.rotation.z = elapsed * 0.2;
+      world.satellitePivot.rotation.y = elapsed * (0.48 + index * 0.05);
+      world.satellitePivot.rotation.z = elapsed * 0.14;
     });
   }
 
@@ -872,10 +872,10 @@ export class SceneWorld {
     const reveal = this.state.tunnelReveal;
     const travel = this.state.tunnelTravel;
 
-    this.tunnelTube.material.opacity = 0.04 + reveal * 0.18;
-    this.tunnelLine.material.opacity = 0.08 + reveal * 0.52;
-    this.tunnelRings.material.opacity = 0.06 + reveal * 0.28;
-    this.tunnelTrails.material.opacity = 0.1 + reveal * 0.82;
+    this.tunnelTube.material.opacity = 0.03 + reveal * 0.12;
+    this.tunnelLine.material.opacity = 0.06 + reveal * 0.34;
+    this.tunnelRings.material.opacity = 0.05 + reveal * 0.16;
+    this.tunnelTrails.material.opacity = 0.08 + reveal * 0.48;
 
     this.tunnelRingOffsets.forEach((offset, index) => {
       const progress = (offset + travel * 0.82 + elapsed * 0.015) % 1;
@@ -884,7 +884,7 @@ export class SceneWorld {
 
       this.tempObject.position.copy(this.tempVector);
       this.tempObject.quaternion.setFromUnitVectors(this.forwardAxis, this.tempTangent.normalize());
-      this.tempObject.scale.setScalar(0.74 + reveal * 0.35 + Math.sin(elapsed * 2 + index) * 0.04);
+      this.tempObject.scale.setScalar(0.78 + reveal * 0.24 + Math.sin(elapsed * 1.6 + index) * 0.025);
       this.tempObject.updateMatrix();
       this.tunnelRings.setMatrixAt(index, this.tempObject.matrix);
     });
@@ -913,10 +913,10 @@ export class SceneWorld {
   updateEnding(elapsed) {
     const calm = this.state.endingCalm;
 
-    this.endingGroup.position.y = -0.4 + Math.sin(elapsed * 0.24) * 0.8 * (1 - calm * 0.65);
-    this.endingCore.rotation.y = elapsed * 0.1 * (1 - calm * 0.5);
-    this.endingAura.material.uniforms.uOpacity.value = 0.08 + calm * 0.18;
-    this.endingAura.scale.setScalar(0.95 + calm * 0.22 + Math.sin(elapsed * 0.6) * 0.02);
+    this.endingGroup.position.y = -0.4 + Math.sin(elapsed * 0.2) * 0.55 * (1 - calm * 0.7);
+    this.endingCore.rotation.y = elapsed * 0.08 * (1 - calm * 0.55);
+    this.endingAura.material.uniforms.uOpacity.value = 0.06 + calm * 0.12;
+    this.endingAura.scale.setScalar(0.96 + calm * 0.16 + Math.sin(elapsed * 0.5) * 0.015);
 
     const endPositions = this.endParticleData.positions;
     const endBase = this.endParticleData.base;
@@ -927,7 +927,7 @@ export class SceneWorld {
     }
 
     this.endParticles.geometry.attributes.position.needsUpdate = true;
-    this.endParticles.material.opacity = 0.46 - calm * 0.28;
+    this.endParticles.material.opacity = 0.28 - calm * 0.14;
   }
 
   destroy() {

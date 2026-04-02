@@ -18,6 +18,34 @@ export class ScrollController {
     });
   }
 
+  syncDomParallax(progress) {
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
+    const cameraState = this.cameraController.state;
+    const driftX = gsap.utils.clamp(-1, 1, cameraState.x / 6.8);
+    const driftY = gsap.utils.clamp(-1, 1, (cameraState.y - 0.45) / 2.4);
+    const depth = gsap.utils.clamp(0, 1, progress);
+    const calm = gsap.utils.clamp(0, 1, cameraState.calm ?? 0);
+    const root = document.documentElement;
+    const syncState = {
+      progress,
+      driftX,
+      driftY,
+      depth,
+      calm,
+    };
+
+    window.__portfolioCinematicState = syncState;
+
+    root.style.setProperty("--cinema-progress", progress.toFixed(4));
+    root.style.setProperty("--cinema-drift-x", driftX.toFixed(4));
+    root.style.setProperty("--cinema-drift-y", driftY.toFixed(4));
+    root.style.setProperty("--cinema-depth", depth.toFixed(4));
+    root.style.setProperty("--cinema-calm", calm.toFixed(4));
+  }
+
   createLenis() {
     this.lenis = new Lenis({
       autoRaf: false,
@@ -51,6 +79,8 @@ export class ScrollController {
     const cameraState = this.cameraController.state;
     const sceneState = this.sceneWorld.state;
 
+    this.syncDomParallax(0);
+
     // One scrubbed timeline drives the full camera journey and scene-state transitions.
     this.timeline = gsap.timeline({
       defaults: { ease: "none" },
@@ -62,6 +92,7 @@ export class ScrollController {
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           sceneState.masterProgress = self.progress;
+          this.syncDomParallax(self.progress);
         },
       },
     });
@@ -266,6 +297,20 @@ export class ScrollController {
     if (this.lenis) {
       this.lenis.off("scroll", this.handleLenisScroll);
       this.lenis.destroy();
+    }
+
+    if (typeof window !== "undefined") {
+      delete window.__portfolioCinematicState;
+    }
+
+    if (typeof document !== "undefined") {
+      const root = document.documentElement;
+
+      root.style.removeProperty("--cinema-progress");
+      root.style.removeProperty("--cinema-drift-x");
+      root.style.removeProperty("--cinema-drift-y");
+      root.style.removeProperty("--cinema-depth");
+      root.style.removeProperty("--cinema-calm");
     }
   }
 }

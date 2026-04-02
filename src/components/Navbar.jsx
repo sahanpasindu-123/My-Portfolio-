@@ -1,5 +1,3 @@
-import { useActiveSection } from "../hooks/useActiveSection";
-
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
@@ -9,11 +7,7 @@ const NAV_ITEMS = [
   { id: "contact", label: "Contact" },
 ];
 
-const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
-
-export default function Navbar() {
-  const activeSection = useActiveSection(SECTION_IDS);
-
+export default function Navbar({ activeSection }) {
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
       <nav
@@ -37,8 +31,8 @@ export default function Navbar() {
                     href={`#${item.id}`}
                     className={`inline-flex rounded-full px-4 py-2 transition ${
                       isActive
-                        ? "bg-white/10 text-[#4CE7FF]"
-                        : "hover:bg-white/5 hover:text-white"
+                        ? "bg-white/12 text-[#9FEFFF] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+                        : "hover:bg-white/[0.08] hover:text-white"
                     }`}
                   >
                     {item.label}

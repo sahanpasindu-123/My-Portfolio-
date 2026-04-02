@@ -52,18 +52,32 @@ const skillCategories = [
   },
 ];
 
-export default function SkillsSection() {
+export default function SkillsSection({ isActive = false }) {
   return (
     <AnimatedSection
       id="skills"
       animation="skills"
+      isActive={isActive}
       data-section
+      data-parallax-scope
       data-skills-section
       className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(154,110,245,0.14),transparent_24%),radial-gradient(circle_at_86%_80%,rgba(76,231,255,0.12),transparent_20%)]" />
+      <div
+        data-parallax
+        data-speed="slow"
+        className="parallax-atmosphere pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(154,110,245,0.08),transparent_24%),radial-gradient(circle_at_86%_80%,rgba(76,231,255,0.08),transparent_20%)]"
+      />
+      <div
+        data-parallax
+        data-speed="slow"
+        data-parallax-x="right"
+        className="parallax-atmosphere pointer-events-none absolute -right-12 top-10 h-36 w-36 rounded-full bg-[#4CE7FF]/8 blur-3xl"
+      />
+      <div className="parallax-fog pointer-events-none absolute inset-x-0 bottom-0 h-24" />
+      <div className="section-noise-guard" aria-hidden="true" />
 
-      <div className="relative space-y-10">
+      <div className="relative z-10 space-y-10">
         <SectionTitle
           eyebrow="Skills"
           title="Technical strengths organized around frontend, backend, databases, and development tools."
@@ -71,8 +85,15 @@ export default function SkillsSection() {
         />
 
         <div className="grid gap-6 xl:grid-cols-2">
-          {skillCategories.map((category) => (
-            <SkillCategoryCard key={category.title} {...category} />
+          {skillCategories.map((category, index) => (
+            <div
+              key={category.title}
+              data-parallax
+              data-speed="medium"
+              data-parallax-x={index % 2 === 0 ? "right" : "left"}
+            >
+              <SkillCategoryCard {...category} />
+            </div>
           ))}
         </div>
       </div>

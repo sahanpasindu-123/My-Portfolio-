@@ -17,17 +17,25 @@ const experiences = [
   },
 ];
 
-export default function ExperienceSection() {
+export default function ExperienceSection({ isActive = false }) {
   return (
     <AnimatedSection
       id="experience"
       animation="experience"
+      isActive={isActive}
       data-section
+      data-parallax-scope
       className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(154,110,245,0.12),transparent_24%),radial-gradient(circle_at_8%_85%,rgba(76,231,255,0.12),transparent_20%)]" />
+      <div
+        data-parallax
+        data-speed="slow"
+        className="parallax-atmosphere pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(154,110,245,0.08),transparent_24%),radial-gradient(circle_at_8%_85%,rgba(76,231,255,0.08),transparent_20%)]"
+      />
+      <div className="parallax-fog pointer-events-none absolute inset-x-0 top-0 h-24" />
+      <div className="section-noise-guard" aria-hidden="true" />
 
-      <div className="relative space-y-10">
+      <div className="relative z-10 space-y-10">
         <SectionTitle
           eyebrow="Experience"
           title="Hands-on experience shaped by real operational challenges, client communication, and dependable execution."
@@ -36,10 +44,14 @@ export default function ExperienceSection() {
 
         <div className="space-y-8">
           {experiences.map((experience) => (
-            <ExperienceTimelineCard
+            <div
               key={`${experience.company}-${experience.period}`}
-              {...experience}
-            />
+              data-parallax
+              data-speed="medium"
+              data-parallax-x="right"
+            >
+              <ExperienceTimelineCard {...experience} />
+            </div>
           ))}
         </div>
       </div>

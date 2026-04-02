@@ -26,7 +26,7 @@ export class CinematicExperience {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.15;
+    this.renderer.toneMappingExposure = 1.02;
     this.renderer.setClearColor("#02040b", 1);
 
     this.mountCanvas();
