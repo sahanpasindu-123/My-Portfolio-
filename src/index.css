@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: "Inter", sans-serif;
+  background-color: #0b0f19;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(154, 110, 245, 0.16), transparent 24%),
+    radial-gradient(circle at 85% 20%, rgba(76, 231, 255, 0.12), transparent 20%),
+    linear-gradient(180deg, #0b0f19 0%, #09111f 48%, #0b0f19 100%);
+  color: #e2e8f0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+section {
+  scroll-margin-top: 7rem;
+}
+
+::selection {
+  background-color: rgba(154, 110, 245, 0.32);
+  color: #f8fafc;
+}
+
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(-8%, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.06);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(16px) scale(1.04);
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.06] backdrop-blur-2xl;
+  }
+
+  .section-shell {
+    @apply rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_24px_80px_rgba(15,23,42,0.45)];
+  }
+
+  .pill {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-4 py-1 text-sm font-medium text-slate-200;
+  }
+}
+
+@layer utilities {
+  .animate-aurora {
+    animation: aurora 18s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 10s ease-in-out infinite;
+  }
+
+  .animate-float-reverse {
+    animation: float-reverse 12s ease-in-out infinite;
+  }
+}
