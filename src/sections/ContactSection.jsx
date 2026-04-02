@@ -1,9 +1,11 @@
+import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 
 export default function ContactSection() {
   return (
-    <section
+    <AnimatedSection
       id="contact"
+      animation="contact"
       data-section
       data-contact-section
       className="content-panel section-shell px-6 py-16 sm:px-10"
@@ -15,7 +17,10 @@ export default function ContactSection() {
           description="Replace the contact details below with your email, LinkedIn, GitHub, or a working contact form."
         />
 
-        <div className="glass-panel rounded-[1.75rem] p-6 sm:min-w-[320px]">
+        <div
+          data-contact-panel
+          className="glass-panel rounded-[1.75rem] p-6 sm:min-w-[320px]"
+        >
           <div className="space-y-4 text-slate-300">
             <p data-contact-item>
               Email:{" "}
@@ -50,6 +55,6 @@ export default function ContactSection() {
           </a>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

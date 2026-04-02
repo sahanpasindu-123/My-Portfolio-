@@ -1,3 +1,4 @@
+import AnimatedSection from "../components/AnimatedSection";
 import heroGrid from "../assets/hero-grid.svg";
 
 const focusAreas = [
@@ -26,8 +27,9 @@ const stackItems = [
 
 export default function HomeSection() {
   return (
-    <section
+    <AnimatedSection
       id="home"
+      animation="home"
       data-section
       data-hero-section
       className="content-panel relative isolate overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0B0F19]/80 px-6 py-16 shadow-[0_40px_120px_rgba(2,6,23,0.6)] sm:px-10 sm:py-20"
@@ -128,6 +130,6 @@ export default function HomeSection() {
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

@@ -126,6 +126,23 @@ html.lenis.lenis-stopped body {
   -webkit-backdrop-filter: blur(10px) saturate(125%);
 }
 
+[data-animated-section],
+[data-section-title-item],
+[data-hero-item],
+[data-hero-card],
+[data-about-copy],
+[data-about-media],
+[data-skill-card],
+[data-skill-badge],
+[data-experience-card],
+[data-project-aside],
+[data-project-card],
+[data-contact-panel],
+[data-contact-item] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
 .portfolio-content h1,
 .portfolio-content h2,
 .portfolio-content h3 {
@@ -286,4 +303,12 @@ html.lenis.lenis-stopped body {
 
 ::selection {
   background: rgba(146, 242, 255, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora,
+  .animate-float-slow,
+  .animate-float-reverse {
+    animation: none !important;
+  }
 }

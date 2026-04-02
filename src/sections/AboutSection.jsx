@@ -1,9 +1,11 @@
+import AnimatedSection from "../components/AnimatedSection";
 import profileImg from "../assets/profile.png";
 
 export default function AboutSection() {
   return (
-    <section
+    <AnimatedSection
       id="about"
+      animation="about"
       data-section
       data-about-section
       className="content-panel relative isolate overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.03] px-6 py-16 shadow-[0_28px_90px_rgba(2,6,23,0.45)] sm:px-10"
@@ -63,6 +65,6 @@ export default function AboutSection() {
           />
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

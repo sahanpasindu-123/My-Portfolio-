@@ -1,3 +1,4 @@
+import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 import SkillCategoryCard from "../components/SkillCategoryCard";
 
@@ -53,8 +54,9 @@ const skillCategories = [
 
 export default function SkillsSection() {
   return (
-    <section
+    <AnimatedSection
       id="skills"
+      animation="skills"
       data-section
       data-skills-section
       className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
@@ -74,6 +76,6 @@ export default function SkillsSection() {
           ))}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

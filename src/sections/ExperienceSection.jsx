@@ -1,3 +1,4 @@
+import AnimatedSection from "../components/AnimatedSection";
 import ExperienceTimelineCard from "../components/ExperienceTimelineCard";
 import SectionTitle from "../components/SectionTitle";
 
@@ -18,8 +19,9 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <section
+    <AnimatedSection
       id="experience"
+      animation="experience"
       data-section
       className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
     >
@@ -41,6 +43,6 @@ export default function ExperienceSection() {
           ))}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

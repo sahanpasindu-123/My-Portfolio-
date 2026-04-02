@@ -1,3 +1,4 @@
+import AnimatedSection from "../components/AnimatedSection";
 import SectionTitle from "../components/SectionTitle";
 
 const projects = [
@@ -50,8 +51,9 @@ function GitHubIcon() {
 
 export default function ProjectsSection() {
   return (
-    <section
+    <AnimatedSection
       id="projects"
+      animation="projects"
       data-section
       className="content-panel relative isolate overflow-hidden rounded-[2.4rem] border border-white/10 bg-[#0D1220]/80 px-6 py-16 shadow-[0_32px_120px_rgba(2,6,23,0.55)] sm:px-8 lg:px-10"
     >
@@ -69,8 +71,7 @@ export default function ProjectsSection() {
           />
 
           <div
-            data-reveal
-            data-delay="0.12"
+            data-project-aside
             className="glass-panel max-w-md rounded-[1.75rem] px-5 py-4 text-sm leading-7 text-slate-300"
           >
             Selected work across full-stack systems, AI-assisted learning, secure
@@ -139,6 +140,6 @@ export default function ProjectsSection() {
           ))}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }
