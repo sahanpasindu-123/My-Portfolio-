@@ -63,8 +63,8 @@ export default function ProjectsSection() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionTitle
             eyebrow="Projects"
-            title="Featured builds presented as standout glass cards with layered motion and depth."
-            description="Each project card is structured to highlight product value, implementation detail, and the stack behind it."
+            title="Selected builds focused on implementation, problem solving, and practical product development."
+            description="Each project highlights technical scope, core functionality, and the stack behind the build."
           />
 
           <div className="glass-panel max-w-md rounded-[1.75rem] px-5 py-4 text-sm leading-7 text-slate-300">
@@ -90,7 +90,7 @@ export default function ProjectsSection() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-4">
                     <span className="inline-flex rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-[#4CE7FF]">
-                      Case Study
+                      Project Build
                     </span>
                     <h3 className="max-w-xl text-2xl font-semibold tracking-tight text-white">
                       {project.title}

@@ -15,10 +15,10 @@ export default function ContactSection() {
             <p>
               Email:{" "}
               <a
-                href="mailto:sahan@example.com"
+                href="mailto:lspasindum1720@gmail.com"
                 className="text-white transition hover:text-cyan-200"
               >
-                sahan@example.com
+                lspasindum1720@gmail.com
               </a>
             </p>
             <p>
@@ -34,6 +34,13 @@ export default function ContactSection() {
               </a>
             </p>
           </div>
+
+          <a
+            href="mailto:lspasindum1720@gmail.com"
+            className="mt-6 inline-flex rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] px-6 py-3 font-medium text-slate-950 shadow-[0_16px_40px_rgba(76,231,255,0.18)] transition hover:scale-[1.02]"
+          >
+            Contact Me
+          </a>
         </div>
       </div>
     </section>

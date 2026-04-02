@@ -3,9 +3,9 @@ import SkillCategoryCard from "../components/SkillCategoryCard";
 
 const skillCategories = [
   {
-    title: "Frontend & UI/UX",
+    title: "Frontend Development",
     description:
-      "Designing clear interfaces and building polished frontend experiences with modern web tools.",
+      "Building clear, responsive web interfaces with HTML, CSS, JavaScript, React.js, and UI/UX awareness.",
     icon: "design",
     skills: [
       { name: "Figma", icon: "design" },
@@ -62,8 +62,8 @@ export default function SkillsSection() {
       <div className="relative space-y-10">
         <SectionTitle
           eyebrow="Skills"
-          title="Technical strengths organized into focused areas of design and development."
-          description="Each category is structured as a reusable card so the section can grow without turning into a wall of text."
+          title="Technical strengths organized around frontend, backend, databases, and development tools."
+          description="Each category keeps the stack readable while highlighting the tools used to build practical applications."
         />
 
         <div className="grid gap-6 xl:grid-cols-2">

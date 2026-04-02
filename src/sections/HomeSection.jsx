@@ -1,26 +1,26 @@
 import heroGrid from "../assets/hero-grid.svg";
 
 const focusAreas = [
-  "Design systems",
-  "Interactive frontend",
-  "Scalable product UI",
+  "Frontend development",
+  "Modern web technologies",
+  "Scalable applications",
 ];
 
 const stackItems = [
   {
-    title: "UI-first thinking",
+    title: "Frontend implementation",
     description:
-      "Designing interfaces that balance usability, visual polish, and product clarity.",
+      "Building responsive interfaces with modern React patterns, clean structure, and practical frontend foundations.",
   },
   {
-    title: "Frontend execution",
+    title: "Usable interfaces",
     description:
-      "Turning concepts into responsive React experiences with clean component structure.",
+      "Applying UI/UX thinking to keep interfaces clean, user-friendly, and consistent across the frontend.",
   },
   {
-    title: "Full-stack mindset",
+    title: "Software foundations",
     description:
-      "Connecting interfaces to practical backend workflows that support real products.",
+      "Strengthening problem-solving and software engineering skills through continuous learning and real-world projects.",
   },
 ];
 
@@ -51,28 +51,32 @@ export default function HomeSection() {
               <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 Sahan Pasindu
               </h1>
-              <h2 className="max-w-3xl bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] bg-clip-text text-2xl font-medium text-transparent sm:text-3xl lg:text-4xl">
-                UI/UX Designer &amp; Full-Stack Developer
+              <h2 className="max-w-3xl text-lg font-medium leading-relaxed text-white sm:text-xl lg:text-2xl">
+                Undergraduate IT Student | Future Frontend Developer &amp;
+                Software Engineer
               </h2>
             </div>
             <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              IT Undergraduate passionate about building intuitive and scalable
-              digital experiences
+              I am an IT undergraduate with a growing interest in frontend
+              development and modern web technologies. I enjoy building clean,
+              user-friendly interfaces and continuously improving my skills to
+              create better digital experiences.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="#projects"
+              href="/cv.pdf"
+              download
               className="rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] px-6 py-3 font-medium text-slate-950 shadow-[0_16px_40px_rgba(76,231,255,0.18)] transition hover:scale-[1.02]"
             >
-              View Projects
+              Download CV
             </a>
             <a
-              href="#contact"
+              href="#projects"
               className="glass-panel rounded-full px-6 py-3 font-medium text-white transition hover:bg-white/[0.1]"
             >
-              Contact Me
+              View Projects
             </a>
           </div>
 
@@ -91,7 +95,7 @@ export default function HomeSection() {
         <div className="glass-panel relative overflow-hidden rounded-[2rem] p-6 shadow-[0_28px_100px_rgba(2,6,23,0.48)]">
           <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#4CE7FF]/70 to-transparent" />
           <p className="text-sm font-medium uppercase tracking-[0.3em] text-slate-400">
-            Creative Stack
+            Development Focus
           </p>
 
           <div className="mt-6 grid gap-4">

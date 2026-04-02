@@ -27,8 +27,8 @@ export default function ExperienceSection() {
       <div className="relative space-y-10">
         <SectionTitle
           eyebrow="Experience"
-          title="Hands-on experience shaped by real clients, constraints, and delivery pressure."
-          description="A concise timeline layout keeps the section readable now and leaves room to add more roles later."
+          title="Hands-on experience shaped by real operational challenges, client communication, and dependable execution."
+          description="This section highlights practical problem solving, adaptability, and professional communication in a fast-paced environment."
         />
 
         <div className="space-y-8">

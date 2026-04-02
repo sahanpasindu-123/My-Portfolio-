@@ -1,23 +1,4 @@
-const highlights = [
-  {
-    id: "01",
-    title: "UI/UX Design",
-    description:
-      "Crafting user flows, wireframes, and polished interfaces with clarity and usability in mind.",
-  },
-  {
-    id: "02",
-    title: "React Development",
-    description:
-      "Building responsive frontend experiences with reusable components and modern styling systems.",
-  },
-  {
-    id: "03",
-    title: "Backend Integration",
-    description:
-      "Connecting frontend products to APIs and data services so the experience feels complete end to end.",
-  },
-];
+import profileImg from "../assets/profile.png";
 
 export default function AboutSection() {
   return (
@@ -36,13 +17,16 @@ export default function AboutSection() {
           <div className="space-y-4">
             <h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               IT undergraduate at the University of Kelaniya with a strong
-              focus on UI/UX thinking and modern frontend development.
+              interest in frontend development, modern web technologies, and
+              practical application building.
             </h2>
             <p className="text-base leading-8 text-slate-300 sm:text-lg">
-              I am building a portfolio around thoughtful interface design,
-              smooth frontend execution, and practical backend integration.
-              My goal is to create digital experiences that feel intuitive,
-              performant, and ready to scale.
+              I am an IT undergraduate at the University of Kelaniya with a
+              strong interest in frontend development and modern web
+              technologies, supported by UI/UX design skills. I enjoy building
+              clean, user-friendly web interfaces while learning best practices,
+              and I continue improving through real-world projects that help me
+              create practical and scalable applications.
             </p>
           </div>
 
@@ -61,30 +45,19 @@ export default function AboutSection() {
                   Focus
                 </p>
                 <p className="mt-3 text-lg font-medium text-white">
-                  UI/UX + Frontend
+                  Frontend + UI/UX
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-          {highlights.map((item) => (
-            <article
-              key={item.title}
-              className="glass-panel rounded-[1.75rem] p-6 transition hover:-translate-y-1"
-            >
-              <p className="text-sm font-medium uppercase tracking-[0.3em] text-[#4CE7FF]">
-                {item.id}
-              </p>
-              <h3 className="mt-5 text-xl font-semibold text-white">
-                {item.title}
-              </h3>
-              <p className="mt-4 leading-7 text-slate-300">
-                {item.description}
-              </p>
-            </article>
-          ))}
+        <div className="glass-panel flex items-center justify-center rounded-[1.75rem] p-4 sm:p-6">
+          <img
+            src={profileImg}
+            alt="Sahan Pasindu"
+            className="w-full max-w-md rounded-2xl shadow-lg transition-transform duration-500 hover:scale-[1.03]"
+          />
         </div>
       </div>
     </section>
