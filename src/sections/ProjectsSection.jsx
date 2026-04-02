@@ -52,7 +52,8 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative isolate overflow-hidden rounded-[2.4rem] border border-white/10 bg-[#0D1220]/80 px-6 py-16 shadow-[0_32px_120px_rgba(2,6,23,0.55)] sm:px-8 lg:px-10"
+      data-section
+      className="content-panel relative isolate overflow-hidden rounded-[2.4rem] border border-white/10 bg-[#0D1220]/80 px-6 py-16 shadow-[0_32px_120px_rgba(2,6,23,0.55)] sm:px-8 lg:px-10"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_8%_12%,rgba(154,110,245,0.18),transparent_24%),radial-gradient(circle_at_92%_18%,rgba(76,231,255,0.16),transparent_20%),linear-gradient(180deg,rgba(13,18,32,0.96),rgba(11,15,25,0.86))]" />
       <div className="absolute -left-16 top-16 h-52 w-52 rounded-full bg-[#9A6EF5]/20 blur-3xl animate-float-slow" />
@@ -67,7 +68,11 @@ export default function ProjectsSection() {
             description="Each project highlights technical scope, core functionality, and the stack behind the build."
           />
 
-          <div className="glass-panel max-w-md rounded-[1.75rem] px-5 py-4 text-sm leading-7 text-slate-300">
+          <div
+            data-reveal
+            data-delay="0.12"
+            className="glass-panel max-w-md rounded-[1.75rem] px-5 py-4 text-sm leading-7 text-slate-300"
+          >
             Selected work across full-stack systems, AI-assisted learning, secure
             storage workflows, and production-ready authentication.
           </div>
@@ -77,7 +82,8 @@ export default function ProjectsSection() {
           {projects.map((project) => (
             <article
               key={project.title}
-              className="group relative rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-white/5 p-[1px] transition duration-500 hover:scale-[1.02]"
+              data-project-card
+              className="group relative rounded-[2rem] bg-gradient-to-br from-white/10 via-transparent to-white/5 p-[1px] transition duration-500 hover:scale-[1.03]"
             >
               <div
                 className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br ${project.accent} opacity-70 blur-2xl transition duration-500 group-hover:opacity-100`}
@@ -121,6 +127,7 @@ export default function ProjectsSection() {
                   </p>
                   <a
                     href={project.githubUrl}
+                    data-button-hover
                     className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-[#9A6EF5]/20 to-[#4CE7FF]/20 px-5 py-3 text-sm font-medium text-white transition duration-300 hover:border-[#4CE7FF]/30 hover:bg-gradient-to-r hover:from-[#9A6EF5]/30 hover:to-[#4CE7FF]/30"
                   >
                     <GitHubIcon />

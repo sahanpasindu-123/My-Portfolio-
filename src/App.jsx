@@ -16,6 +16,7 @@ export default function App() {
   return (
     <div className="portfolio-app">
       <CinematicPortfolio />
+      <div className="portfolio-overlay" aria-hidden="true" />
 
       <div className="portfolio-content">
         <div className="portfolio-shell relative min-h-screen overflow-x-hidden bg-transparent text-slate-100">

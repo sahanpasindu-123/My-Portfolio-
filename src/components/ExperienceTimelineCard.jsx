@@ -8,7 +8,7 @@ export default function ExperienceTimelineCard({
   points,
 }) {
   return (
-    <div className="group relative pl-10">
+    <div data-experience-card className="group relative pl-10">
       <div className="absolute left-[0.85rem] top-0 h-full w-px bg-gradient-to-b from-[#9A6EF5] via-[#4CE7FF] to-transparent opacity-70" />
       <div className="absolute left-0 top-8 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-[#0F172A] shadow-[0_0_30px_rgba(154,110,245,0.35)]">
         <div className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF]" />

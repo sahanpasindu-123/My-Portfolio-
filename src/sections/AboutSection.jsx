@@ -4,12 +4,14 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative isolate overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.03] px-6 py-16 shadow-[0_28px_90px_rgba(2,6,23,0.45)] sm:px-10"
+      data-section
+      data-about-section
+      className="content-panel relative isolate overflow-hidden rounded-[2.25rem] border border-white/10 bg-white/[0.03] px-6 py-16 shadow-[0_28px_90px_rgba(2,6,23,0.45)] sm:px-10"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_18%,rgba(154,110,245,0.16),transparent_24%),radial-gradient(circle_at_90%_82%,rgba(76,231,255,0.12),transparent_20%)]" />
 
       <div className="relative grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-        <div className="space-y-6">
+        <div data-about-copy className="space-y-6">
           <p className="inline-flex rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium uppercase tracking-[0.3em] text-[#9A6EF5]">
             About Me
           </p>
@@ -50,7 +52,10 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="glass-panel flex items-center justify-center rounded-[1.75rem] p-4 sm:p-6">
+        <div
+          data-about-media
+          className="glass-panel flex items-center justify-center rounded-[1.75rem] p-4 sm:p-6"
+        >
           <img
             src={profileImg}
             alt="Sahan Pasindu"

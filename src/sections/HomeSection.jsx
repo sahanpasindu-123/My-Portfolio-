@@ -28,7 +28,9 @@ export default function HomeSection() {
   return (
     <section
       id="home"
-      className="relative isolate overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0B0F19]/80 px-6 py-16 shadow-[0_40px_120px_rgba(2,6,23,0.6)] sm:px-10 sm:py-20"
+      data-section
+      data-hero-section
+      className="content-panel relative isolate overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0B0F19]/80 px-6 py-16 shadow-[0_40px_120px_rgba(2,6,23,0.6)] sm:px-10 sm:py-20"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(154,110,245,0.26),transparent_28%),radial-gradient(circle_at_85%_18%,rgba(76,231,255,0.18),transparent_20%),linear-gradient(135deg,rgba(11,15,25,0.96),rgba(11,15,25,0.86),rgba(9,17,31,0.96))]" />
       <div className="absolute inset-[-20%] bg-[conic-gradient(from_90deg_at_50%_50%,rgba(154,110,245,0.26),rgba(76,231,255,0.14),rgba(154,110,245,0.22))] opacity-60 blur-3xl animate-aurora" />
@@ -44,10 +46,13 @@ export default function HomeSection() {
       <div className="relative grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div className="space-y-8">
           <div className="space-y-5">
-            <p className="inline-flex rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium uppercase tracking-[0.32em] text-[#4CE7FF]">
+            <p
+              data-hero-item
+              className="inline-flex rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium uppercase tracking-[0.32em] text-[#4CE7FF]"
+            >
               Portfolio / 2026
             </p>
-            <div className="space-y-4">
+            <div data-hero-item className="space-y-4">
               <h1 className="text-4xl font-semibold tracking-tight text-[#4CE7FF] sm:text-5xl lg:text-6xl">
                 Sahan Pasindu
               </h1>
@@ -56,7 +61,10 @@ export default function HomeSection() {
                 Software Engineer
               </h2>
             </div>
-            <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+            <p
+              data-hero-item
+              className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg"
+            >
               I am an IT undergraduate with a growing interest in frontend
               development and modern web technologies. I enjoy building clean,
               user-friendly interfaces and continuously improving my skills to
@@ -64,23 +72,25 @@ export default function HomeSection() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4">
+          <div data-hero-item className="flex flex-wrap gap-4">
             <a
               href="/cv.pdf"
               download
+              data-button-hover
               className="rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] px-6 py-3 font-medium text-slate-950 shadow-[0_16px_40px_rgba(76,231,255,0.18)] transition hover:scale-[1.02]"
             >
               Download CV
             </a>
             <a
               href="#projects"
+              data-button-hover
               className="glass-panel rounded-full px-6 py-3 font-medium text-white transition hover:bg-white/[0.1]"
             >
               View Projects
             </a>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div data-hero-item className="flex flex-wrap gap-3">
             {focusAreas.map((item) => (
               <span
                 key={item}
@@ -92,7 +102,10 @@ export default function HomeSection() {
           </div>
         </div>
 
-        <div className="glass-panel relative overflow-hidden rounded-[2rem] p-6 shadow-[0_28px_100px_rgba(2,6,23,0.48)]">
+        <div
+          data-hero-card
+          className="glass-panel relative overflow-hidden rounded-[2rem] p-6 shadow-[0_28px_100px_rgba(2,6,23,0.48)]"
+        >
           <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#4CE7FF]/70 to-transparent" />
           <p className="text-sm font-medium uppercase tracking-[0.3em] text-slate-400">
             Development Focus

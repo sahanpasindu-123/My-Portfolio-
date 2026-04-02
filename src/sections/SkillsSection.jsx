@@ -55,7 +55,9 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
+      data-section
+      data-skills-section
+      className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(154,110,245,0.14),transparent_24%),radial-gradient(circle_at_86%_80%,rgba(76,231,255,0.12),transparent_20%)]" />
 

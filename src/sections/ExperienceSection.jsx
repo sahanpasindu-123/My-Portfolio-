@@ -20,7 +20,8 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
+      data-section
+      className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(154,110,245,0.12),transparent_24%),radial-gradient(circle_at_8%_85%,rgba(76,231,255,0.12),transparent_20%)]" />
 
