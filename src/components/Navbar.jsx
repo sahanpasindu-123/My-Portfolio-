@@ -16,7 +16,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <nav className="mx-auto max-w-6xl rounded-full border border-white/10 bg-slate-950/45 px-5 py-4 shadow-[0_10px_30px_rgba(2,6,23,0.35)] backdrop-blur-xl">
+      <nav
+        data-navbar-shell
+        className="navbar-shell mx-auto max-w-6xl rounded-full border border-white/10 px-5 py-4"
+      >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <a
             href="#home"
