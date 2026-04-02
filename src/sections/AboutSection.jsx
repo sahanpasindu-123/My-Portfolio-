@@ -16,9 +16,7 @@ export default function AboutSection() {
 
           <div className="space-y-4">
             <h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              IT undergraduate at the University of Kelaniya with a strong
-              interest in frontend development, modern web technologies, and
-              practical application building.
+              Frontend Developer Building Scalable User Experiences
             </h2>
             <p className="text-base leading-8 text-slate-300 sm:text-lg">
               I am an IT undergraduate at the University of Kelaniya with a

@@ -48,7 +48,7 @@ export default function HomeSection() {
               Portfolio / 2026
             </p>
             <div className="space-y-4">
-              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-semibold tracking-tight text-[#4CE7FF] sm:text-5xl lg:text-6xl">
                 Sahan Pasindu
               </h1>
               <h2 className="max-w-3xl text-lg font-medium leading-relaxed text-white sm:text-xl lg:text-2xl">
