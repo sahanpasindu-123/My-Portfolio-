@@ -138,7 +138,8 @@ html.lenis.lenis-stopped body {
 [data-project-aside],
 [data-project-card],
 [data-contact-panel],
-[data-contact-item] {
+[data-contact-item],
+[data-reveal] {
   will-change: transform, opacity;
   backface-visibility: hidden;
 }

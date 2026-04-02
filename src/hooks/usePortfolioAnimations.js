@@ -1,17 +1,19 @@
 import { useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  createRevealGroup,
+  createRevealTimeline,
+  getAlternatingDirection,
+  hydrateRevealGroups,
+  setRevealGroupsHidden,
+  setRevealGroupsVisible,
+} from "../utils/alternatingReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ENTER_TRIGGER = "top 78%";
-const EXIT_TRIGGER = "bottom 24%";
-const HIDDEN_STATE = {
-  autoAlpha: 0,
-  x: 0,
-  y: 50,
-  scale: 0.98,
-};
+const ENTER_TRIGGER = "top 82%";
+const INITIAL_VISIBILITY_RATIO = 0.18;
 
 const MOTION_TARGET_SELECTOR = [
   "[data-animated-section]",
@@ -30,399 +32,191 @@ const MOTION_TARGET_SELECTOR = [
   "[data-reveal]",
 ].join(", ");
 
-const createRootGroup = (section, overrides = {}) => ({
-  resolve: () => [section],
-  hidden: {
-    y: 30,
-    scale: 0.995,
-    ...overrides.hidden,
-  },
-  enter: {
-    duration: 0.72,
-    ease: "power3.out",
-    ...overrides.enter,
-  },
-  exit: {
-    amount: 22,
-    scale: 0.992,
-    duration: 0.42,
-    ease: "power2.inOut",
-    ...overrides.exit,
-  },
-});
+const createRootGroup = (section, overrides = {}) =>
+  createRevealGroup({
+    resolve: () => [section],
+    distance: 26,
+    hidden: {
+      y: 10,
+      scale: 0.997,
+    },
+    enter: {
+      duration: 0.8,
+      ease: "power3.out",
+    },
+    position: 0,
+    ...overrides,
+  });
 
-const createTitleGroup = (overrides = {}) => ({
-  selector: "[data-section-title-item]",
-  hidden: {
-    y: 42,
-    scale: 0.992,
-    ...overrides.hidden,
-  },
-  enter: {
-    duration: 0.78,
-    ease: "power3.out",
-    stagger: 0.1,
-    ...overrides.enter,
-  },
-  exit: {
-    amount: 26,
-    scale: 0.992,
-    duration: 0.4,
-    ease: "power2.inOut",
-    stagger: 0.03,
-    ...overrides.exit,
-  },
-});
+const createTitleGroup = (overrides = {}) =>
+  createRevealGroup({
+    selector: "[data-section-title-item]",
+    distance: 52,
+    hidden: {
+      y: 10,
+      scale: 0.992,
+    },
+    enter: {
+      duration: 0.9,
+      ease: "power3.out",
+      stagger: 0.08,
+    },
+    position: 0.08,
+    ...overrides,
+  });
 
 const SECTION_PROFILES = {
   default: (section) => [createRootGroup(section), createTitleGroup()],
   home: (section) => [
     createRootGroup(section, {
-      hidden: { y: 24, scale: 0.996 },
-      enter: { duration: 0.82 },
-      exit: { amount: 20, duration: 0.38, scale: 0.994 },
+      distance: 22,
+      hidden: { y: 8, scale: 0.998 },
+      enter: { duration: 0.78, ease: "power3.out" },
     }),
-    {
+    createRevealGroup({
       selector: "[data-hero-item]",
-      hidden: { y: 52, scale: 0.992 },
+      distance: 78,
+      hidden: { y: 10, scale: 0.992 },
       enter: {
-        duration: 0.86,
+        duration: 0.98,
         ease: "power3.out",
-        stagger: 0.12,
+        stagger: 0.1,
       },
-      exit: {
-        amount: 36,
-        scale: 0.986,
-        duration: 0.48,
-        ease: "power2.inOut",
-        stagger: 0.04,
-      },
-    },
-    {
+      position: 0.08,
+    }),
+    createRevealGroup({
       selector: "[data-hero-card]",
-      hidden: { y: 40, scale: 0.972 },
+      distance: 88,
+      hidden: { y: 8, scale: 0.986 },
       enter: {
-        duration: 0.88,
+        duration: 1.04,
         ease: "power3.out",
-        delay: 0.16,
       },
-      exit: {
-        amount: 34,
-        scale: 0.974,
-        duration: 0.5,
-        ease: "power2.inOut",
-      },
-    },
+      position: 0.2,
+    }),
   ],
   about: (section) => [
     createRootGroup(section),
-    {
-      selector: "[data-about-media]",
-      hidden: { x: -56, y: 0, scale: 0.978 },
-      enter: {
-        duration: 0.84,
-        ease: "power3.out",
-      },
-      exit: {
-        amount: 28,
-        scale: 0.986,
-        duration: 0.46,
-        ease: "power2.inOut",
-      },
-    },
-    {
+    createRevealGroup({
       selector: "[data-about-copy]",
-      hidden: { x: 56, y: 0, scale: 0.992 },
+      distance: 70,
+      hidden: { y: 8, scale: 0.992 },
       enter: {
-        duration: 0.84,
+        duration: 0.94,
         ease: "power3.out",
-        delay: 0.1,
       },
-      exit: {
-        amount: 30,
-        scale: 0.988,
-        duration: 0.48,
-        ease: "power2.inOut",
+      position: 0.1,
+    }),
+    createRevealGroup({
+      selector: "[data-about-media]",
+      distance: 82,
+      hidden: { y: 10, scale: 0.986 },
+      enter: {
+        duration: 1,
+        ease: "power3.out",
       },
-    },
+      position: 0.18,
+    }),
   ],
   skills: (section) => [
     createRootGroup(section),
     createTitleGroup(),
-    {
+    createRevealGroup({
       selector: "[data-skill-card]",
-      hidden: { y: 44, scale: 0.972 },
+      distance: 66,
+      hidden: { y: 10, scale: 0.984 },
       enter: {
-        duration: 0.82,
+        duration: 0.94,
         ease: "power3.out",
-        stagger: 0.08,
-        delay: 0.08,
+        stagger: 0.09,
       },
-      exit: {
-        amount: 34,
-        scale: 0.964,
-        duration: 0.48,
-        ease: "power2.inOut",
-        stagger: 0.04,
-      },
-    },
-    {
+      position: 0.18,
+    }),
+    createRevealGroup({
       selector: "[data-skill-badge]",
-      hidden: { y: 18, scale: 0.84 },
+      distance: 22,
+      hidden: { y: 8, scale: 0.97 },
       enter: {
-        duration: 0.58,
+        duration: 0.6,
         ease: "power3.out",
-        stagger: 0.035,
-        delay: 0.18,
+        stagger: 0.025,
       },
-      exit: {
-        amount: 18,
-        scale: 0.92,
-        duration: 0.34,
-        ease: "power2.inOut",
-        stagger: 0.012,
-      },
-    },
+      position: 0.3,
+    }),
   ],
   experience: (section) => [
     createRootGroup(section),
     createTitleGroup(),
-    {
+    createRevealGroup({
       selector: "[data-experience-card]",
-      hidden: { y: 40, scale: 0.984 },
+      distance: 62,
+      hidden: { y: 10, scale: 0.986 },
       enter: {
-        duration: 0.76,
+        duration: 0.92,
         ease: "power3.out",
         stagger: 0.08,
-        delay: 0.08,
       },
-      exit: {
-        amount: 30,
-        scale: 0.978,
-        duration: 0.42,
-        ease: "power2.inOut",
-        stagger: 0.02,
-      },
-    },
+      position: 0.18,
+    }),
   ],
   projects: (section) => [
     createRootGroup(section, {
-      hidden: { y: 28, scale: 0.994 },
-      enter: { duration: 0.76 },
+      distance: 24,
+      hidden: { y: 10, scale: 0.996 },
+      enter: { duration: 0.82, ease: "power3.out" },
     }),
     createTitleGroup(),
-    {
+    createRevealGroup({
       selector: "[data-project-aside]",
-      hidden: { y: 32, scale: 0.988 },
+      distance: 46,
+      hidden: { y: 8, scale: 0.99 },
       enter: {
-        duration: 0.72,
+        duration: 0.84,
         ease: "power3.out",
-        delay: 0.1,
       },
-      exit: {
-        amount: 24,
-        scale: 0.984,
-        duration: 0.4,
-        ease: "power2.inOut",
-      },
-    },
-    {
+      position: 0.16,
+    }),
+    createRevealGroup({
       selector: "[data-project-card]",
-      hidden: { y: 48, scale: 0.972 },
+      distance: 70,
+      hidden: { y: 10, scale: 0.984 },
       enter: {
-        duration: 0.82,
+        duration: 0.96,
         ease: "power3.out",
-        stagger: 0.08,
-        delay: 0.08,
+        stagger: 0.09,
       },
-      exit: {
-        amount: 34,
-        scale: 0.968,
-        duration: 0.46,
-        ease: "power2.inOut",
-        stagger: 0.04,
-      },
-    },
+      position: 0.24,
+    }),
   ],
   contact: (section) => [
     createRootGroup(section),
     createTitleGroup(),
-    {
+    createRevealGroup({
       selector: "[data-contact-panel]",
-      hidden: { y: 34, scale: 0.982 },
+      distance: 64,
+      hidden: { y: 10, scale: 0.986 },
       enter: {
-        duration: 0.76,
+        duration: 0.92,
         ease: "power3.out",
-        delay: 0.08,
       },
-      exit: {
-        amount: 26,
-        scale: 0.978,
-        duration: 0.42,
-        ease: "power2.inOut",
-      },
-    },
-    {
+      position: 0.16,
+    }),
+    createRevealGroup({
       selector: "[data-contact-item]",
-      hidden: { y: 24, scale: 0.988 },
+      distance: 24,
+      hidden: { y: 8, scale: 0.978 },
       enter: {
-        duration: 0.62,
+        duration: 0.66,
         ease: "power3.out",
-        stagger: 0.1,
-        delay: 0.14,
+        stagger: 0.08,
       },
-      exit: {
-        amount: 20,
-        scale: 0.972,
-        duration: 0.34,
-        ease: "power2.inOut",
-        stagger: 0.03,
-      },
-    },
+      position: 0.28,
+    }),
   ],
 };
 
 const normalizeElements = (elements) =>
   gsap.utils.toArray(elements).filter(Boolean);
-
-const resolveGroupElements = (section, group) => {
-  if (group.resolve) {
-    return normalizeElements(group.resolve(section));
-  }
-
-  return normalizeElements(section.querySelectorAll(group.selector));
-};
-
-const getProfileGroups = (section) => {
-  const profileName = section.dataset.animationProfile ?? "default";
-  const profileFactory = SECTION_PROFILES[profileName] ?? SECTION_PROFILES.default;
-
-  return profileFactory(section)
-    .map((group) => ({
-      ...group,
-      elements: resolveGroupElements(section, group),
-    }))
-    .filter((group) => group.elements.length);
-};
-
-const getExitY = (group, direction) => {
-  const amount = group.exit?.amount ?? 40;
-
-  return direction < 0 ? amount : -amount;
-};
-
-const setGroupState = (group, state, direction = 1) => {
-  if (!group.elements.length) {
-    return;
-  }
-
-  if (state === "visible") {
-    gsap.set(group.elements, {
-      autoAlpha: 1,
-      clearProps: "transform",
-    });
-
-    return;
-  }
-
-  if (state === "exit") {
-    gsap.set(group.elements, {
-      autoAlpha: 0,
-      x: 0,
-      y: getExitY(group, direction),
-      scale: group.exit?.scale ?? 0.98,
-      force3D: true,
-    });
-
-    return;
-  }
-
-  gsap.set(group.elements, {
-    ...HIDDEN_STATE,
-    ...group.hidden,
-    force3D: true,
-  });
-};
-
-const animateGroupState = (group, state, direction = 1) => {
-  if (!group.elements.length) {
-    return;
-  }
-
-  gsap.killTweensOf(group.elements);
-
-  if (state === "visible") {
-    const { duration = 0.82, ease = "power3.out", delay = 0, stagger = 0 } =
-      group.enter ?? {};
-
-    gsap.to(group.elements, {
-      autoAlpha: 1,
-      x: 0,
-      y: 0,
-      scale: 1,
-      duration,
-      ease,
-      delay,
-      stagger,
-      overwrite: "auto",
-      force3D: true,
-      clearProps: "transform",
-    });
-
-    return;
-  }
-
-  const { duration = 0.48, ease = "power2.inOut", delay = 0, stagger = 0 } =
-    group.exit ?? {};
-
-  gsap.to(group.elements, {
-    autoAlpha: 0,
-    x: 0,
-    y: getExitY(group, direction),
-    scale: group.exit?.scale ?? 0.98,
-    duration,
-    ease,
-    delay,
-    stagger,
-    overwrite: "auto",
-    force3D: true,
-  });
-};
-
-const syncSectionState = (section, groups) => {
-  const rect = section.getBoundingClientRect();
-  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-  const enterThreshold = viewportHeight * 0.78;
-  const exitThreshold = viewportHeight * 0.24;
-  const isInitialHero = section.id === "home" && window.scrollY < 4;
-  const isVisible = rect.top <= enterThreshold && rect.bottom >= exitThreshold;
-  const isPastSection = rect.bottom < exitThreshold;
-
-  if (isPastSection) {
-    groups.forEach((group) => setGroupState(group, "exit", 1));
-    return;
-  }
-
-  if (isVisible) {
-    if (isInitialHero) {
-      requestAnimationFrame(() => {
-        groups.forEach((group) => animateGroupState(group, "visible"));
-      });
-      return;
-    }
-
-    groups.forEach((group) => setGroupState(group, "visible"));
-    return;
-  }
-
-  groups.forEach((group) => setGroupState(group, "hidden"));
-
-  if (isInitialHero) {
-    requestAnimationFrame(() => {
-      groups.forEach((group) => animateGroupState(group, "visible"));
-    });
-  }
-};
 
 const setVisible = (elements) => {
   if (!elements.length) {
@@ -433,6 +227,55 @@ const setVisible = (elements) => {
     autoAlpha: 1,
     clearProps: "transform",
   });
+};
+
+const getInitialSectionState = (section) => {
+  const rect = section.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  const triggerLine = viewportHeight * 0.82;
+  const visibilityLine = viewportHeight * INITIAL_VISIBILITY_RATIO;
+
+  if (rect.bottom <= 0) {
+    return "visible";
+  }
+
+  if (rect.top <= triggerLine && rect.bottom >= visibilityLine) {
+    return "play";
+  }
+
+  return "hidden";
+};
+
+const getProfileGroups = (section, sectionIndex) => {
+  const profileName = section.dataset.animationProfile ?? "default";
+  const profileFactory = SECTION_PROFILES[profileName] ?? SECTION_PROFILES.default;
+  const sectionDirection = getAlternatingDirection(section, sectionIndex);
+
+  section.dataset.resolvedAnimationDirection =
+    sectionDirection < 0 ? "left" : "right";
+
+  return hydrateRevealGroups(section, sectionDirection, profileFactory(section));
+};
+
+const getStandaloneRevealDirection = (element) => {
+  const manualDirection = element.dataset.revealDirection;
+
+  if (manualDirection === "right") {
+    return 1;
+  }
+
+  if (manualDirection === "left") {
+    return -1;
+  }
+
+  const parentSection = element.closest("[data-animated-section]");
+
+  if (parentSection?.dataset.resolvedAnimationDirection === "right") {
+    return 1;
+  }
+
+  return -1;
 };
 
 export function usePortfolioAnimations() {
@@ -447,9 +290,15 @@ export function usePortfolioAnimations() {
 
     const cleanup = [];
     const ctx = gsap.context(() => {
-      const revealElements = normalizeElements(document.querySelectorAll("[data-reveal]"));
-      const parallaxElements = normalizeElements(document.querySelectorAll("[data-parallax]"));
-      const buttons = normalizeElements(document.querySelectorAll("[data-button-hover]"));
+      const revealElements = normalizeElements(
+        document.querySelectorAll("[data-reveal]"),
+      );
+      const parallaxElements = normalizeElements(
+        document.querySelectorAll("[data-parallax]"),
+      );
+      const buttons = normalizeElements(
+        document.querySelectorAll("[data-button-hover]"),
+      );
       const animatedSections = normalizeElements(
         document.querySelectorAll("[data-animated-section]"),
       );
@@ -473,64 +322,82 @@ export function usePortfolioAnimations() {
         return;
       }
 
-      animatedSections.forEach((section) => {
-        const groups = getProfileGroups(section);
+      animatedSections.forEach((section, sectionIndex) => {
+        const groups = getProfileGroups(section, sectionIndex);
 
-        groups.forEach((group) => setGroupState(group, "hidden"));
+        if (!groups.length) {
+          return;
+        }
+
+        setRevealGroupsHidden(groups);
+
+        const initialState = getInitialSectionState(section);
+
+        if (initialState === "visible") {
+          setRevealGroupsVisible(groups);
+          return;
+        }
+
+        const timeline = createRevealTimeline(groups);
+        cleanup.push(() => timeline.kill());
+
+        if (initialState === "play") {
+          timeline.play(0);
+          return;
+        }
 
         const trigger = ScrollTrigger.create({
           trigger: section,
           start: ENTER_TRIGGER,
-          end: EXIT_TRIGGER,
+          once: true,
+          fastScrollEnd: true,
           invalidateOnRefresh: true,
+          preventOverlaps: "portfolio-section-reveal",
           onEnter: () => {
-            groups.forEach((group) => animateGroupState(group, "visible"));
-          },
-          onLeave: () => {
-            groups.forEach((group) => animateGroupState(group, "exit", 1));
-          },
-          onEnterBack: () => {
-            groups.forEach((group) => animateGroupState(group, "visible"));
-          },
-          onLeaveBack: () => {
-            groups.forEach((group) => animateGroupState(group, "exit", -1));
+            timeline.play(0);
           },
         });
 
-        syncSectionState(section, groups);
+        cleanup.push(() => trigger.kill());
       });
 
       revealElements
         .filter((element) => !element.closest("[data-animated-section]"))
         .forEach((element) => {
           const delay = Number(element.dataset.delay ?? 0);
+          const direction = getStandaloneRevealDirection(element);
 
           gsap.set(element, {
             autoAlpha: 0,
-            y: 40,
+            x: direction * 44,
+            y: 10,
             force3D: true,
           });
 
-          gsap.to(element, {
+          const animation = gsap.to(element, {
             autoAlpha: 1,
+            x: 0,
             y: 0,
             delay,
-            duration: 0.78,
+            duration: 0.84,
             ease: "power3.out",
             clearProps: "transform",
             scrollTrigger: {
               trigger: element,
               start: "top 86%",
               once: true,
+              fastScrollEnd: true,
             },
           });
+
+          cleanup.push(() => animation.kill());
         });
 
       parallaxElements.forEach((element) => {
         const speed = Number(element.dataset.speed ?? 0.14);
         const trigger = element.closest("[data-section]") ?? element;
 
-        gsap.to(element, {
+        const tween = gsap.to(element, {
           yPercent: speed * -100,
           ease: "none",
           force3D: true,
@@ -541,6 +408,8 @@ export function usePortfolioAnimations() {
             scrub: 1.2,
           },
         });
+
+        cleanup.push(() => tween.kill());
       });
 
       if (progressBar) {
@@ -549,7 +418,7 @@ export function usePortfolioAnimations() {
           transformOrigin: "left center",
         });
 
-        gsap.to(progressBar, {
+        const tween = gsap.to(progressBar, {
           scaleX: 1,
           ease: "none",
           scrollTrigger: {
@@ -559,10 +428,12 @@ export function usePortfolioAnimations() {
             scrub: 0.18,
           },
         });
+
+        cleanup.push(() => tween.kill());
       }
 
       if (navbar) {
-        ScrollTrigger.create({
+        const trigger = ScrollTrigger.create({
           trigger: document.documentElement,
           start: "top top",
           end: "bottom bottom",
@@ -570,6 +441,8 @@ export function usePortfolioAnimations() {
             navbar.classList.toggle("is-scrolled", self.scroll() > 24);
           },
         });
+
+        cleanup.push(() => trigger.kill());
       }
 
       buttons.forEach((button) => {
