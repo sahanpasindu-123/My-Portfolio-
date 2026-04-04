@@ -15,7 +15,11 @@ export default function AnimatedSection({
       data-animated-section
       data-animation-profile={animation}
       data-focus-state={isActive ? "active" : "inactive"}
-      className={joinClasses("focus-section", isActive ? "is-active" : "is-inactive", className)}
+      className={joinClasses(
+        "focus-section scroll-mt-28 sm:scroll-mt-32",
+        isActive ? "is-active" : "is-inactive",
+        className,
+      )}
       {...props}
     >
       {children}

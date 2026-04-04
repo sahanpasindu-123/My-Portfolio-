@@ -135,21 +135,6 @@ export class SceneWorld {
       aura: portalAura,
     };
 
-    this.debugCube = new THREE.Mesh(
-      new THREE.BoxGeometry(2.3, 2.3, 2.3),
-      new THREE.MeshStandardMaterial({
-        color: "#ff5f5f",
-        emissive: "#ff8f4d",
-        emissiveIntensity: 1.1,
-        roughness: 0.28,
-        metalness: 0.08,
-        transparent: true,
-        opacity: 0.88,
-      }),
-    );
-    this.debugCube.position.set(0, 0, 8);
-    this.introGroup.add(this.debugCube);
-
     const introPositions = new Float32Array(INTRO_PARTICLES * 3);
     const introBase = new Float32Array(INTRO_PARTICLES * 3);
     const introColors = new Float32Array(INTRO_PARTICLES * 3);
@@ -725,10 +710,6 @@ export class SceneWorld {
 
     const portalScale = 1 + this.state.portalSwirl * 0.12 + Math.sin(elapsed * 1.6) * 0.02;
     this.portal.group.scale.setScalar(portalScale);
-
-    this.debugCube.rotation.x = elapsed * 0.64;
-    this.debugCube.rotation.y = elapsed * 0.86;
-    this.debugCube.material.opacity = THREE.MathUtils.clamp(0.78 - this.state.portalFade * 0.72, 0.08, 0.78);
 
     const introPositions = this.introParticleData.positions;
     const introBase = this.introParticleData.base;

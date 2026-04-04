@@ -61,7 +61,7 @@ export default function SkillsSection({ isActive = false }) {
       data-section
       data-parallax-scope
       data-skills-section
-      className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
+      className="content-panel section-shell section-frame relative isolate overflow-hidden"
     >
       <div
         data-parallax
@@ -77,14 +77,15 @@ export default function SkillsSection({ isActive = false }) {
       <div className="parallax-fog pointer-events-none absolute inset-x-0 bottom-0 h-24" />
       <div className="section-noise-guard" aria-hidden="true" />
 
-      <div className="relative z-10 space-y-10">
+      <div className="section-stack">
         <SectionTitle
           eyebrow="Skills"
-          title="Technical strengths organized around frontend, backend, databases, and development tools."
-          description="Each category keeps the stack readable while highlighting the tools used to build practical applications."
+          title="Core Skills"
+          subtitle="Frontend, backend, database, and tooling strengths organized for quick scanning."
+          description="The stack stays readable while still showing the tools used to build practical applications."
         />
 
-        <div className="grid gap-6 xl:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={category.title}

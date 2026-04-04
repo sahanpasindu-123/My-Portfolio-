@@ -5,7 +5,7 @@ const FOOTER_LINKS = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/sahan-pasindu/",
+    href: "https://www.linkedin.com/in/sahan-pasindu-483623320",
   },
   {
     label: "Email",
@@ -18,15 +18,15 @@ export default function Footer() {
     <footer className="mx-auto w-full max-w-6xl px-4 pb-10 pt-4 sm:px-6 lg:px-8">
       <div
         data-reveal
-        className="glass-panel relative overflow-hidden rounded-[2rem] px-6 py-6 sm:px-8"
+        className="glass-panel relative overflow-hidden rounded-[1.9rem] px-4 py-6 sm:px-6 lg:px-8"
       >
         <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#4CE7FF]/70 to-transparent" />
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="space-y-2">
-            <p className="text-sm font-medium uppercase tracking-[0.28em] text-slate-300">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="min-w-0 space-y-2">
+            <p className="type-label text-slate-300">
               Sahan Pasindu
             </p>
-            <p className="max-w-2xl text-sm leading-7 text-slate-200">
+            <p className="max-w-2xl text-sm leading-6 text-slate-200 sm:text-[0.98rem]">
               UI/UX-focused full-stack portfolio crafted with React, Tailwind,
               and GSAP-ready motion design.
             </p>

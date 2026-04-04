@@ -5,7 +5,7 @@ const FOOTER_LINKS = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/sahan-pasindu/",
+    href: "https://www.linkedin.com/in/sahan-pasindu-483623320",
   },
   {
     label: "Email",

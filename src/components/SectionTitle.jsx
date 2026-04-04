@@ -1,26 +1,46 @@
-export default function SectionTitle({ eyebrow, title, description }) {
+export default function SectionTitle({
+  eyebrow,
+  title,
+  subtitle,
+  description,
+}) {
   return (
     <div
       data-section-title
       data-parallax
       data-speed="medium"
-      className="max-w-2xl space-y-5"
+      className="max-w-[38rem] min-w-0 space-y-4 sm:space-y-5"
     >
-      <p data-section-title-item className="pill bg-white/[0.08]">
-        {eyebrow}
-      </p>
-      <h2
-        data-section-title-item
-        className="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.8rem]"
-      >
-        {title}
-      </h2>
       <p
         data-section-title-item
-        className="max-w-2xl text-[1.02rem] leading-8 text-slate-200 sm:text-lg"
+        className="pill type-label bg-white/[0.08] px-3 py-2 sm:px-4"
       >
-        {description}
+        {eyebrow}
       </p>
+      <div className="space-y-3">
+        <h2
+          data-section-title-item
+          className="type-section-title text-white"
+        >
+          {title}
+        </h2>
+        {subtitle ? (
+          <p
+            data-section-title-item
+            className="type-section-subtitle"
+          >
+            {subtitle}
+          </p>
+        ) : null}
+      </div>
+      {description ? (
+        <p
+          data-section-title-item
+          className="type-body max-w-2xl"
+        >
+          {description}
+        </p>
+      ) : null}
     </div>
   );
 }

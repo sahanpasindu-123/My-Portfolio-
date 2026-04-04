@@ -15,8 +15,8 @@ const SECTION_IDS = [
   "home",
   "about",
   "skills",
-  "experience",
   "projects",
+  "experience",
   "contact",
 ];
 
@@ -54,12 +54,12 @@ export default function App() {
           />
           <div className="portfolio-depth-haze pointer-events-none absolute inset-0 -z-10" />
           <Navbar activeSection={activeSection} />
-          <main className="portfolio-main mx-auto flex max-w-6xl flex-col gap-24 px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+          <main className="portfolio-main mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-16 pt-4 sm:gap-14 sm:px-6 sm:pb-20 sm:pt-6 md:px-7 lg:gap-16 lg:px-8 lg:pt-8">
             <HomeSection isActive={activeSection === "home"} />
             <AboutSection isActive={activeSection === "about"} />
             <SkillsSection isActive={activeSection === "skills"} />
-            <ExperienceSection isActive={activeSection === "experience"} />
             <ProjectsSection isActive={activeSection === "projects"} />
+            <ExperienceSection isActive={activeSection === "experience"} />
             <ContactSection isActive={activeSection === "contact"} />
           </main>
           <Footer />

@@ -272,6 +272,22 @@ const normalizeElements = (elements) =>
 
 const clamp01 = gsap.utils.clamp(0, 1);
 
+const getViewportMotionFactor = () => {
+  if (typeof window === "undefined") {
+    return 1;
+  }
+
+  if (window.innerWidth <= 640) {
+    return 0.56;
+  }
+
+  if (window.innerWidth <= 1024) {
+    return 0.76;
+  }
+
+  return 1;
+};
+
 const readCinematicSync = () => {
   if (typeof window === "undefined") {
     return DEFAULT_CINEMATIC_SYNC;
@@ -557,6 +573,7 @@ export function usePortfolioAnimations() {
           const sectionState = element.closest("[data-focus-state]")?.dataset.focusState;
           const isActiveSection = sectionState === "active";
           const calmDamping = 1 - cinematicSync.calm * 0.22;
+          const motionScale = getViewportMotionFactor();
           const motionFactor = (isAtmosphere ? 0.68 : 0.44) * calmDamping;
           const sceneFactor = isAtmosphere ? 0.78 : 0.46;
           const scaleFactor = isAtmosphere ? 0.72 : 0.38;
@@ -569,16 +586,24 @@ export function usePortfolioAnimations() {
           );
           const contentOpacity = gsap.utils.clamp(0.95, 1, 0.95 + focus * 0.05);
           const x =
-            centeredProgress * profile.xTravel * profile.horizontalDirection * motionFactor +
+            centeredProgress *
+              profile.xTravel *
+              profile.horizontalDirection *
+              motionFactor *
+              motionScale +
             cinematicSync.driftX * profile.sceneX * sceneFactor +
-            state.mouseX * (isAtmosphere ? 0.15 : 1);
+            state.mouseX * (isAtmosphere ? 0.15 : 1) * motionScale;
           const y =
-            centeredProgress * profile.yTravel * profile.verticalDirection * motionFactor +
+            centeredProgress *
+              profile.yTravel *
+              profile.verticalDirection *
+              motionFactor *
+              motionScale +
             cinematicSync.driftY * profile.sceneY * sceneFactor +
-            state.mouseY * (isAtmosphere ? 0.15 : 1);
+            state.mouseY * (isAtmosphere ? 0.15 : 1) * motionScale;
           const scale =
             1 -
-            (1 - focus) * profile.scaleDelta * scaleFactor +
+            (1 - focus) * profile.scaleDelta * scaleFactor * motionScale +
             cinematicSync.depth * profile.sceneDepth * sceneFactor;
           const opacity = isAtmosphere ? atmosphereOpacity : contentOpacity;
 
@@ -689,53 +714,55 @@ export function usePortfolioAnimations() {
         cleanup.push(() => trigger.kill());
       }
 
-      buttons.forEach((button) => {
-        const xTo = gsap.quickTo(button, "x", {
-          duration: 0.35,
-          ease: "power3.out",
-        });
-        const yTo = gsap.quickTo(button, "y", {
-          duration: 0.35,
-          ease: "power3.out",
-        });
-
-        const handleEnter = () => {
-          gsap.to(button, {
-            scale: 1.02,
-            duration: 0.3,
-            ease: "power3.out",
-          });
-        };
-
-        const handleMove = (event) => {
-          const bounds = button.getBoundingClientRect();
-          const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 14;
-          const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 10;
-
-          xTo(x);
-          yTo(y);
-        };
-
-        const handleLeave = () => {
-          xTo(0);
-          yTo(0);
-          gsap.to(button, {
-            scale: 1,
+      if (hasFinePointer) {
+        buttons.forEach((button) => {
+          const xTo = gsap.quickTo(button, "x", {
             duration: 0.35,
             ease: "power3.out",
           });
-        };
+          const yTo = gsap.quickTo(button, "y", {
+            duration: 0.35,
+            ease: "power3.out",
+          });
 
-        button.addEventListener("mouseenter", handleEnter);
-        button.addEventListener("mousemove", handleMove);
-        button.addEventListener("mouseleave", handleLeave);
+          const handleEnter = () => {
+            gsap.to(button, {
+              scale: 1.02,
+              duration: 0.3,
+              ease: "power3.out",
+            });
+          };
 
-        cleanup.push(() => {
-          button.removeEventListener("mouseenter", handleEnter);
-          button.removeEventListener("mousemove", handleMove);
-          button.removeEventListener("mouseleave", handleLeave);
+          const handleMove = (event) => {
+            const bounds = button.getBoundingClientRect();
+            const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 14;
+            const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 10;
+
+            xTo(x);
+            yTo(y);
+          };
+
+          const handleLeave = () => {
+            xTo(0);
+            yTo(0);
+            gsap.to(button, {
+              scale: 1,
+              duration: 0.35,
+              ease: "power3.out",
+            });
+          };
+
+          button.addEventListener("mouseenter", handleEnter);
+          button.addEventListener("mousemove", handleMove);
+          button.addEventListener("mouseleave", handleLeave);
+
+          cleanup.push(() => {
+            button.removeEventListener("mouseenter", handleEnter);
+            button.removeEventListener("mousemove", handleMove);
+            button.removeEventListener("mouseleave", handleLeave);
+          });
         });
-      });
+      }
     });
 
     ScrollTrigger.refresh();

@@ -7,7 +7,7 @@ const projects = [
     description:
       "Full-stack system developed for Liyanage Motors with inventory tracking, reservation handling, and dashboard-driven workflows for daily operations.",
     techStack: ["React", "Node.js", "MySQL"],
-    githubUrl: "#",
+    githubUrl: "https://github.com/sahanpasindu-123/SDP_NextOne_fixed_v2.git",
     accent: "from-[#9A6EF5]/70 via-[#4CE7FF]/45 to-transparent",
   },
   {
@@ -15,7 +15,7 @@ const projects = [
     description:
       "NLP-based adaptive quiz platform designed to personalize science learning with intelligent question flow and AI-assisted evaluation.",
     techStack: ["Python", "Flask", "SQLite", "Gemini API"],
-    githubUrl: "#",
+    githubUrl: "https://github.com/sahanpasindu-123/Ai-project.git",
     accent: "from-[#4CE7FF]/70 via-[#9A6EF5]/40 to-transparent",
   },
   {
@@ -23,7 +23,7 @@ const projects = [
     description:
       "Secure upload and download platform built around distributed object storage, containerized services, and dependable file handling.",
     techStack: ["Node.js", "React", "Docker", "MinIO"],
-    githubUrl: "#",
+    githubUrl: "https://github.com/sahanpasindu-123/DistributedSystem.git",
     accent: "from-[#9A6EF5]/60 via-[#4CE7FF]/50 to-transparent",
   },
   {
@@ -31,7 +31,7 @@ const projects = [
     description:
       "Authentication platform featuring JWT-based access control, email verification, and password reset flows for production-ready account management.",
     techStack: ["Node.js", "MongoDB"],
-    githubUrl: "#",
+    githubUrl: "https://github.com/sahanpasindu-123/Web-Auth-System.git",
     accent: "from-[#4CE7FF]/55 via-[#9A6EF5]/50 to-transparent",
   },
 ];
@@ -57,7 +57,7 @@ export default function ProjectsSection({ isActive = false }) {
       isActive={isActive}
       data-section
       data-parallax-scope
-      className="content-panel relative isolate overflow-hidden rounded-[2.4rem] border border-white/12 bg-[#0B1320]/90 px-6 py-16 shadow-[0_32px_120px_rgba(2,6,23,0.55)] sm:px-8 lg:px-10"
+      className="content-panel section-frame relative isolate overflow-hidden rounded-[2rem] border border-white/12 bg-[#0B1320]/90 shadow-[0_32px_120px_rgba(2,6,23,0.55)] sm:rounded-[2.3rem]"
     >
       <div
         data-parallax
@@ -85,23 +85,24 @@ export default function ProjectsSection({ isActive = false }) {
       <div className="parallax-fog pointer-events-none absolute inset-x-0 bottom-0 h-28" />
       <div className="section-noise-guard" aria-hidden="true" />
 
-      <div className="relative z-10 space-y-10">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div className="section-stack">
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
           <SectionTitle
             eyebrow="Projects"
-            title="Selected builds focused on implementation, problem solving, and practical product development."
-            description="Each project highlights technical scope, core functionality, and the stack behind the build."
+            title="Selected Projects"
+            subtitle="Implementation-focused builds across product interfaces, backend systems, and AI-assisted workflows."
+            description="Each project surfaces the product problem, core functionality, and the stack behind the build."
           />
 
           <div
             data-parallax
             data-speed="fast"
             data-parallax-x="left"
-            className="max-w-md"
+            className="xl:max-w-sm"
           >
             <div
               data-project-aside
-              className="glass-panel rounded-[1.75rem] px-5 py-4 text-sm leading-7 text-slate-200"
+              className="glass-panel rounded-[1.6rem] px-4 py-4 text-sm leading-6 text-slate-200 sm:px-5"
             >
               Selected work across full-stack systems, AI-assisted learning,
               secure storage workflows, and production-ready authentication.
@@ -109,7 +110,7 @@ export default function ProjectsSection({ isActive = false }) {
           </div>
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
           {projects.map((project, index) => (
             <div
               key={project.title}
@@ -119,34 +120,34 @@ export default function ProjectsSection({ isActive = false }) {
             >
               <article
                 data-project-card
-                className="group relative rounded-[2rem] bg-gradient-to-br from-white/12 via-transparent to-white/6 p-[1px] transition duration-500 hover:scale-[1.02]"
+                className="group relative h-full rounded-[1.9rem] bg-gradient-to-br from-white/12 via-transparent to-white/6 p-[1px] transition duration-500 hover:scale-[1.02]"
               >
                 <div
-                  className={`absolute inset-0 rounded-[2rem] bg-gradient-to-br ${project.accent} opacity-45 blur-2xl transition duration-500 group-hover:opacity-70`}
+                  className={`absolute inset-0 rounded-[1.9rem] bg-gradient-to-br ${project.accent} opacity-45 blur-2xl transition duration-500 group-hover:opacity-70`}
                 />
 
-                <div className="glass-panel relative flex h-full flex-col overflow-hidden rounded-[calc(2rem-1px)] bg-[#0B1320]/92 p-6">
+                <div className="glass-panel relative flex h-full flex-col overflow-hidden rounded-[calc(1.9rem-1px)] bg-[#0B1320]/92 p-4 sm:p-5 lg:p-6">
                   <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#4CE7FF]/75 to-transparent" />
                   <div className="absolute -right-12 top-0 h-32 w-32 rounded-full bg-[#9A6EF5]/12 blur-3xl transition duration-500 group-hover:bg-[#4CE7FF]/12" />
 
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-4">
-                      <span className="inline-flex rounded-full border border-white/12 bg-white/[0.08] px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-[#9FEFFF]">
-                        Project Build
+                  <div className="flex min-w-0 items-start justify-between gap-3">
+                    <div className="min-w-0 space-y-4">
+                      <span className="pill type-label border-white/12 bg-white/[0.08] px-3 py-2 sm:px-4">
+                        Project
                       </span>
-                      <h3 className="max-w-xl text-2xl font-semibold tracking-tight text-white">
+                      <h3 className="type-card-title max-w-xl text-white">
                         {project.title}
                       </h3>
                     </div>
 
-                    <div className="h-12 w-12 rounded-[1rem] bg-[linear-gradient(135deg,rgba(154,110,245,0.24),rgba(76,231,255,0.14))] shadow-[0_0_24px_rgba(76,231,255,0.08)]" />
+                    <div className="hidden h-11 w-11 rounded-[0.95rem] bg-[linear-gradient(135deg,rgba(154,110,245,0.24),rgba(76,231,255,0.14))] shadow-[0_0_24px_rgba(76,231,255,0.08)] sm:block" />
                   </div>
 
-                  <p className="mt-6 flex-1 text-[1.01rem] leading-8 text-slate-200">
+                  <p className="type-card-body mt-4 flex-1 sm:mt-5">
                     {project.description}
                   </p>
 
-                  <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="mt-5 flex flex-wrap gap-2.5">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
@@ -157,14 +158,14 @@ export default function ProjectsSection({ isActive = false }) {
                     ))}
                   </div>
 
-                  <div className="mt-8 flex items-center justify-between gap-4">
-                    <p className="text-xs uppercase tracking-[0.26em] text-slate-400">
-                      GitHub Repository
+                  <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between lg:mt-7">
+                    <p className="type-meta text-slate-400">
+                      Repository
                     </p>
                     <a
                       href={project.githubUrl}
                       data-button-hover
-                      className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-gradient-to-r from-[#9A6EF5]/18 to-[#4CE7FF]/18 px-5 py-3 text-sm font-medium text-white transition duration-300 hover:border-[#4CE7FF]/30 hover:bg-gradient-to-r hover:from-[#9A6EF5]/26 hover:to-[#4CE7FF]/26"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/12 bg-gradient-to-r from-[#9A6EF5]/18 to-[#4CE7FF]/18 px-5 py-3 text-sm font-medium text-white transition duration-300 hover:border-[#4CE7FF]/30 hover:bg-gradient-to-r hover:from-[#9A6EF5]/26 hover:to-[#4CE7FF]/26 sm:w-auto"
                     >
                       <GitHubIcon />
                       View on GitHub

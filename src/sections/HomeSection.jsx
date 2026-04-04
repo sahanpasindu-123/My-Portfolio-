@@ -1,27 +1,21 @@
 import AnimatedSection from "../components/AnimatedSection";
 import heroGrid from "../assets/hero-grid.svg";
 
-const focusAreas = [
-  "Frontend development",
-  "Modern web technologies",
-  "Scalable applications",
-];
-
-const stackItems = [
+const focusHighlights = [
   {
     title: "Frontend implementation",
     description:
-      "Building responsive interfaces with modern React patterns, clean structure, and practical frontend foundations.",
+      "Building responsive React interfaces with clean structure and practical UI detail.",
   },
   {
-    title: "Usable interfaces",
+    title: "UI clarity",
     description:
-      "Applying UI/UX thinking to keep interfaces clean, user-friendly, and consistent across the frontend.",
+      "Keeping layouts readable, intentional, and consistent across devices and screen sizes.",
   },
   {
     title: "Software foundations",
     description:
-      "Strengthening problem-solving and software engineering skills through continuous learning and real-world projects.",
+      "Growing through real projects that strengthen problem solving and engineering fundamentals.",
   },
 ];
 
@@ -34,7 +28,7 @@ export default function HomeSection({ isActive = false }) {
       data-section
       data-parallax-scope
       data-hero-section
-      className="content-panel relative isolate overflow-hidden rounded-[2.5rem] border border-white/12 bg-[#09101A]/90 px-6 py-16 shadow-[0_40px_120px_rgba(2,6,23,0.6)] sm:px-10 sm:py-20"
+      className="content-panel relative isolate overflow-hidden rounded-[2rem] border border-white/12 bg-[#09101A]/90 px-4 py-9 shadow-[0_40px_120px_rgba(2,6,23,0.6)] sm:rounded-[2.3rem] sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-10 lg:py-16"
     >
       <div
         data-parallax
@@ -76,68 +70,59 @@ export default function HomeSection({ isActive = false }) {
       <div className="parallax-fog pointer-events-none absolute inset-x-0 bottom-0 h-36" />
       <div className="section-noise-guard" aria-hidden="true" />
 
-      <div className="relative z-10 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-center lg:gap-10">
         <div
           data-parallax
           data-speed="medium"
           data-parallax-x="right"
           data-mouse-parallax
-          className="space-y-8"
+          className="min-w-0 space-y-5 sm:space-y-6"
         >
-          <div className="space-y-5">
+          <div className="space-y-4">
             <p
               data-hero-item
-              className="inline-flex rounded-full border border-white/12 bg-white/[0.08] px-4 py-2 text-xs font-medium uppercase tracking-[0.32em] text-[#9FEFFF]"
+              className="pill type-label border-white/12 bg-white/[0.08] px-3 py-2 sm:px-4"
             >
               Portfolio / 2026
             </p>
-            <div data-hero-item className="space-y-4">
-              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <div data-hero-item className="min-w-0 space-y-3">
+              <h1 className="type-hero-title text-white">
                 Sahan Pasindu
               </h1>
-              <h2 className="max-w-3xl text-lg font-medium leading-relaxed text-slate-100 sm:text-xl lg:text-2xl">
-                Undergraduate IT Student | Future Frontend Developer &amp;
-                Software Engineer
+              <h2 className="max-w-2xl text-[clamp(1.05rem,0.98rem+0.45vw,1.34rem)] font-medium leading-[1.5] text-slate-100 [text-wrap:balance]">
+                Frontend-focused IT undergraduate building clear, scalable web
+                interfaces.
               </h2>
             </div>
             <p
               data-hero-item
-              className="max-w-2xl text-[1.03rem] leading-8 text-slate-200 sm:text-lg"
+              className="type-body max-w-xl"
             >
-              I am an IT undergraduate with a growing interest in frontend
-              development and modern web technologies. I enjoy building clean,
-              user-friendly interfaces and continuously improving my skills to
-              create better digital experiences.
+              I build clean, user-friendly interfaces through practical
+              projects, modern frontend tools, and a steady focus on better
+              digital experiences.
             </p>
           </div>
 
-          <div data-hero-item className="flex flex-wrap gap-4">
+          <div
+            data-hero-item
+            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+          >
             <a
-              href="/cv.pdf"
+              href="/public/Sahan Pasindu cv.pdf"
               download
               data-button-hover
-              className="rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] px-6 py-3 font-medium text-slate-950 shadow-[0_16px_40px_rgba(76,231,255,0.18)] transition hover:scale-[1.02]"
+              className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] px-6 py-3 font-medium text-slate-950 shadow-[0_16px_40px_rgba(76,231,255,0.18)] transition hover:scale-[1.02] sm:w-auto"
             >
               Download CV
             </a>
             <a
               href="#projects"
               data-button-hover
-              className="glass-panel rounded-full px-6 py-3 font-medium text-white transition hover:bg-white/[0.12]"
+              className="glass-panel inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-medium text-white transition hover:bg-white/[0.12] sm:w-auto"
             >
               View Projects
             </a>
-          </div>
-
-          <div data-hero-item className="flex flex-wrap gap-3">
-            {focusAreas.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-white/12 bg-slate-950/72 px-4 py-2 text-sm text-slate-100"
-              >
-                {item}
-              </span>
-            ))}
           </div>
         </div>
 
@@ -146,28 +131,35 @@ export default function HomeSection({ isActive = false }) {
           data-speed="medium"
           data-parallax-x="left"
           data-mouse-parallax
+          className="min-w-0"
         >
           <div
             data-hero-card
-            className="glass-panel relative overflow-hidden rounded-[2rem] p-6 shadow-[0_28px_100px_rgba(2,6,23,0.48)]"
+            className="glass-panel relative max-w-xl overflow-hidden rounded-[1.7rem] p-4 shadow-[0_28px_100px_rgba(2,6,23,0.48)] sm:p-5 md:p-6 lg:ml-auto"
           >
             <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#4CE7FF]/70 to-transparent" />
-            <p className="text-sm font-medium uppercase tracking-[0.3em] text-slate-300">
-              Development Focus
+            <p className="type-label text-slate-300">
+              Current Focus
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-6 text-slate-200 sm:text-[0.98rem]">
+              A compact snapshot of the areas shaping the work right now.
             </p>
 
-            <div className="mt-6 grid gap-4">
-              {stackItems.map((item) => (
+            <div className="mt-5 space-y-3">
+              {focusHighlights.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-[1.5rem] border border-white/12 bg-slate-950/70 p-5"
+                  className="flex items-start gap-3 rounded-[1.25rem] border border-white/12 bg-slate-950/70 px-4 py-3.5"
                 >
-                  <p className="text-sm uppercase tracking-[0.24em] text-[#9FEFFF]">
-                    {item.title}
-                  </p>
-                  <p className="mt-3 leading-7 text-slate-200">
-                    {item.description}
-                  </p>
+                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF]" />
+                  <div className="space-y-1.5">
+                    <p className="type-meta text-[#9FEFFF]">
+                      {item.title}
+                    </p>
+                    <p className="text-sm leading-6 text-slate-200">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

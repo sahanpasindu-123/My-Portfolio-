@@ -25,7 +25,7 @@ export default function ExperienceSection({ isActive = false }) {
       isActive={isActive}
       data-section
       data-parallax-scope
-      className="content-panel section-shell relative isolate overflow-hidden px-6 py-14 sm:px-8 lg:px-10"
+      className="content-panel section-shell section-frame relative isolate overflow-hidden"
     >
       <div
         data-parallax
@@ -35,22 +35,27 @@ export default function ExperienceSection({ isActive = false }) {
       <div className="parallax-fog pointer-events-none absolute inset-x-0 top-0 h-24" />
       <div className="section-noise-guard" aria-hidden="true" />
 
-      <div className="relative z-10 space-y-10">
+      <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-start">
         <SectionTitle
           eyebrow="Experience"
-          title="Hands-on experience shaped by real operational challenges, client communication, and dependable execution."
-          description="This section highlights practical problem solving, adaptability, and professional communication in a fast-paced environment."
+          title="Experience"
+          subtitle="Practical work shaped by problem solving, client communication, and dependable execution."
+          description="A concise look at the environment that strengthened adaptability and day-to-day delivery."
         />
 
-        <div className="space-y-8">
-          {experiences.map((experience) => (
+        <div className="space-y-5 sm:space-y-6 lg:ml-auto lg:max-w-3xl">
+          {experiences.map((experience, index) => (
             <div
               key={`${experience.company}-${experience.period}`}
               data-parallax
               data-speed="medium"
               data-parallax-x="right"
             >
-              <ExperienceTimelineCard {...experience} />
+              <ExperienceTimelineCard
+                {...experience}
+                isFirst={index === 0}
+                isLast={index === experiences.length - 1}
+              />
             </div>
           ))}
         </div>
