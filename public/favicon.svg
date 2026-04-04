@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="faviconTitle faviconDesc">
+  <title id="faviconTitle">Sahan portfolio favicon</title>
+  <desc id="faviconDesc">A dark rounded square with a bold, tech-inspired S monogram in a cyan to blue gradient.</desc>
+  <defs>
+    <linearGradient id="bg" x1="11" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111F" />
+      <stop offset="1" stop-color="#0D1A31" />
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(49 15) rotate(130) scale(41 45)">
+      <stop offset="0" stop-color="#1D4ED8" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#1D4ED8" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="mark" x1="18" y1="18" x2="46" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#90F7FF" />
+      <stop offset="0.54" stop-color="#4CE7FF" />
+      <stop offset="1" stop-color="#2F6BFF" />
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#bg)" />
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#bgGlow)" />
+  <rect x="4.5" y="4.5" width="55" height="55" rx="15.5" fill="none" stroke="#9FEFFF" stroke-opacity="0.08" />
+
+  <path
+    d="M46 18H28C22.477 18 18 22.477 18 28C18 32.418 21.582 36 26 36H36C40.418 36 44 39.582 44 44C44 48.418 40.418 52 36 52H18"
+    fill="none"
+    stroke="url(#mark)"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="7.5"
+  />
+</svg>
