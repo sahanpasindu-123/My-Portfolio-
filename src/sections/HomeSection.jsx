@@ -109,7 +109,7 @@ export default function HomeSection({ isActive = false }) {
             className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             <a
-              href="/public/Sahan-Pasindu-cv.pdf"
+              href="/Sahan-Pasindu-cv.pdf"
               download
               data-button-hover
               className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#9A6EF5] to-[#4CE7FF] px-6 py-3 font-medium text-slate-950 shadow-[0_16px_40px_rgba(76,231,255,0.18)] transition hover:scale-[1.02] sm:w-auto"
