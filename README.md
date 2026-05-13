@@ -10,8 +10,7 @@ This project was developed using React, Vite, Tailwind CSS, GSAP, and Three.js w
 
 ## 🔗 Portfolio Website
 
-[Visit Portfolio]([https://your-portfolio-link.com](https://my-portfolio-opal-pi-33.vercel.app/))
-
+[Visit Portfolio](https://my-portfolio-opal-pi-33.vercel.app/)
 
 
 # ✨ Features
