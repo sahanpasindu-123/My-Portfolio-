@@ -117,7 +117,7 @@ http://localhost:5173
 
 📧 Email: [lspasindum1720@gmail.com](mailto:lspasindum1720@gmail.com)
 
-💼 LinkedIn: [https://linkedin.com/in/your-linkedin](www.linkedin.com/in/sahan-pasindu-483623320)
+💼 LinkedIn: [www.linkedin.com/in/sahan-pasindu-483623320](www.linkedin.com/in/sahan-pasindu-483623320)
 
 ---
 
